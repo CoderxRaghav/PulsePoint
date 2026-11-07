@@ -5,6 +5,10 @@ import {
   GithubAuthProvider,
   signInWithPopup,
   signInWithRedirect,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  sendPasswordResetEmail,
   getRedirectResult,
   signOut,
   onAuthStateChanged,
@@ -246,6 +250,153 @@ export async function signInWithGithub(): Promise<GoogleSignInResult> {
             error?.message ||
             "Unable to complete GitHub sign-in. Please verify Firebase project settings.",
         };
+    }
+  }
+}
+
+/**
+ * Sign in using Firebase Email and Password.
+ */
+export async function signInWithEmail(email: string, password: string): Promise<GoogleSignInResult> {
+  if (!isFirebaseConfigured || !auth) {
+    return {
+      success: false,
+      isConfigMissing: true,
+      error: "Firebase is not configured yet. Check your environment settings.",
+    };
+  }
+
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email.trim(), password);
+    return {
+      success: true,
+      user: cred.user,
+    };
+  } catch (err: unknown) {
+    const error = err as { code?: string; message?: string };
+    const code = error?.code;
+
+    switch (code) {
+      case "auth/invalid-credential":
+      case "auth/wrong-password":
+      case "auth/user-not-found":
+        return {
+          success: false,
+          error: "Invalid email or password. Please verify your credentials and try again.",
+        };
+      case "auth/invalid-email":
+        return {
+          success: false,
+          error: "The email address is invalid.",
+        };
+      case "auth/too-many-requests":
+        return {
+          success: false,
+          error: "Access temporarily disabled due to many failed login attempts. Please reset your password or try again later.",
+        };
+      case "auth/network-request-failed":
+        return {
+          success: false,
+          error: "Network connection failed. Please check your internet connection.",
+        };
+      default:
+        return {
+          success: false,
+          error: error?.message || "Failed to sign in. Please verify your email and password.",
+        };
+    }
+  }
+}
+
+/**
+ * Register a new user using Firebase Email and Password.
+ */
+export async function signUpWithEmail(
+  email: string,
+  password: string,
+  displayName: string,
+): Promise<GoogleSignInResult> {
+  if (!isFirebaseConfigured || !auth) {
+    return {
+      success: false,
+      isConfigMissing: true,
+      error: "Firebase is not configured yet. Check your environment settings.",
+    };
+  }
+
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email.trim(), password);
+    if (displayName.trim()) {
+      try {
+        await updateProfile(cred.user, { displayName: displayName.trim() });
+      } catch (profileErr) {
+        console.warn("Could not set display name on Firebase user:", profileErr);
+      }
+    }
+    return {
+      success: true,
+      user: cred.user,
+    };
+  } catch (err: unknown) {
+    const error = err as { code?: string; message?: string };
+    const code = error?.code;
+
+    switch (code) {
+      case "auth/email-already-in-use":
+        return {
+          success: false,
+          error: "An account with this email address already exists. Please sign in instead.",
+        };
+      case "auth/invalid-email":
+        return {
+          success: false,
+          error: "Please enter a valid email address.",
+        };
+      case "auth/weak-password":
+        return {
+          success: false,
+          error: "Password is too weak. Please use at least 8 characters.",
+        };
+      case "auth/network-request-failed":
+        return {
+          success: false,
+          error: "Network connection failed. Please check your internet connection.",
+        };
+      default:
+        return {
+          success: false,
+          error: error?.message || "Failed to create account. Please check your details and try again.",
+        };
+    }
+  }
+}
+
+/**
+ * Send password reset email via Firebase.
+ */
+export async function resetPassword(email: string): Promise<{ success: boolean; error?: string }> {
+  if (!isFirebaseConfigured || !auth) {
+    return {
+      success: false,
+      error: "Firebase is not configured yet. Check your environment settings.",
+    };
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email.trim());
+    return { success: true };
+  } catch (err: unknown) {
+    const error = err as { code?: string; message?: string };
+    const code = error?.code;
+
+    switch (code) {
+      case "auth/invalid-email":
+        return { success: false, error: "Please enter a valid email address." };
+      case "auth/user-not-found":
+        // For security, don't leak user existence if not desired, or give friendly message
+        return { success: false, error: "No account found with that email address." };
+      default:
+        return { success: false, error: error?.message || "Unable to send password reset email." };
     }
   }
 }

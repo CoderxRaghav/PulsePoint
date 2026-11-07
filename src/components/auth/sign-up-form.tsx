@@ -15,6 +15,7 @@ import {
 import {
   signInWithGoogle,
   signInWithGithub,
+  signUpWithEmail,
   subscribeToAuthChanges,
   getAuthInitializationError,
   logOut,
@@ -114,7 +115,7 @@ export function SignUpForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatusMessage(null);
 
@@ -123,14 +124,19 @@ export function SignUpForm() {
     }
 
     setIsSubmitting(true);
-
-    setTimeout(() => {
+    try {
+      const result = await signUpWithEmail(email, password, name);
+      if (!result.success) {
+        setStatusMessage({
+          type: "error",
+          text: result.error || "Could not complete registration.",
+        });
+      } else if (result.user) {
+        await continueToProfile(result.user);
+      }
+    } finally {
       setIsSubmitting(false);
-      setStatusMessage({
-        type: "info",
-        text: "Registration fields validated. Google sign-in is active below via Firebase Authentication.",
-      });
-    }, 500);
+    }
   };
 
   const handleGoogleSignUp = async () => {

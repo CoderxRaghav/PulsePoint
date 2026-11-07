@@ -15,6 +15,8 @@ import {
 import {
   signInWithGoogle,
   signInWithGithub,
+  signInWithEmail,
+  resetPassword,
   subscribeToAuthChanges,
   getAuthInitializationError,
   logOut,
@@ -37,6 +39,9 @@ export function SignInForm() {
     text: string;
   } | null>(null);
   const [showForgotModal, setShowForgotModal] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [resetStatus, setResetStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [isResetting, setIsResetting] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const authAttemptInProgress = useRef(false);
   const routingForUid = useRef<string | null>(null);
@@ -93,7 +98,7 @@ export function SignInForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatusMessage(null);
 
@@ -102,14 +107,52 @@ export function SignInForm() {
     }
 
     setIsSubmitting(true);
-
-    setTimeout(() => {
+    try {
+      const result = await signInWithEmail(email, password);
+      if (!result.success) {
+        setStatusMessage({
+          type: "error",
+          text: result.error || "Could not sign in with email and password.",
+        });
+      } else if (result.user) {
+        await continueToProfile(result.user);
+      }
+    } finally {
       setIsSubmitting(false);
-      setStatusMessage({
-        type: "info",
-        text: "Email/password inputs validated. Google Sign-In is ready below via Firebase Authentication.",
+    }
+  };
+
+  const handlePasswordReset = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setResetStatus(null);
+
+    const targetEmail = resetEmail.trim() || email.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!targetEmail || !emailRegex.test(targetEmail)) {
+      setResetStatus({
+        type: "error",
+        text: "Please enter a valid email address.",
       });
-    }, 500);
+      return;
+    }
+
+    setIsResetting(true);
+    try {
+      const res = await resetPassword(targetEmail);
+      if (res.success) {
+        setResetStatus({
+          type: "success",
+          text: `Password reset link sent to ${targetEmail}. Please check your inbox.`,
+        });
+      } else {
+        setResetStatus({
+          type: "error",
+          text: res.error || "Could not send password reset email. Please try again.",
+        });
+      }
+    } finally {
+      setIsResetting(false);
+    }
   };
 
   const handleGoogleSignIn = async () => {
@@ -414,21 +457,77 @@ export function SignInForm() {
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
         >
           <div className="relative w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl border border-slate-200">
-            <h3 id="forgot-title" className="text-lg font-bold text-slate-900 mb-2">
-              Password Reset
-            </h3>
-            <p className="text-xs text-slate-600 leading-relaxed mb-5">
-              Self-service password resets and university email magic links will be integrated with backend milestone deployment. You can also sign in with Google directly.
-            </p>
-            <div className="flex justify-end">
+            <div className="flex items-center justify-between mb-2">
+              <h3 id="forgot-title" className="text-lg font-bold text-slate-900">
+                Reset Password
+              </h3>
               <button
                 type="button"
-                onClick={() => setShowForgotModal(false)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                onClick={() => {
+                  setShowForgotModal(false);
+                  setResetStatus(null);
+                }}
+                className="p-1 rounded text-slate-400 hover:text-slate-600"
+                aria-label="Close modal"
               >
-                Got it
+                <CloseIcon className="w-5 h-5" />
               </button>
             </div>
+            <p className="text-xs text-slate-600 leading-relaxed mb-4">
+              Enter your account email and we will send you a secure Firebase link to reset your password.
+            </p>
+
+            {resetStatus && (
+              <div
+                className={`mb-4 p-3 rounded-xl text-xs leading-relaxed border ${
+                  resetStatus.type === "success"
+                    ? "bg-emerald-50 border-emerald-200 text-emerald-900"
+                    : "bg-rose-50 border-rose-200 text-rose-900"
+                }`}
+              >
+                {resetStatus.text}
+              </div>
+            )}
+
+            <form onSubmit={handlePasswordReset} className="space-y-3">
+              <div>
+                <label
+                  htmlFor="reset-email"
+                  className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1"
+                >
+                  Email address
+                </label>
+                <input
+                  id="reset-email"
+                  type="email"
+                  required
+                  value={resetEmail || email}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  placeholder="you@university.edu"
+                  className="w-full px-3.5 py-2 rounded-xl text-sm bg-white border border-slate-300 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500"
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowForgotModal(false);
+                    setResetStatus(null);
+                  }}
+                  className="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={isResetting}
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-rose-600 hover:bg-rose-500 disabled:opacity-60"
+                >
+                  {isResetting ? "Sending..." : "Send Reset Link"}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
