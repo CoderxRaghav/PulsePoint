@@ -9,7 +9,7 @@ interface AuthBrandPanelProps {
 export function AuthBrandPanel({ className = "" }: AuthBrandPanelProps) {
   return (
     <div
-      className={`relative overflow-hidden flex flex-col justify-between p-8 sm:p-10 lg:p-12 min-h-[340px] md:min-h-[640px] bg-[#07091e] text-white ${className}`}
+      className={`auth-brand-panel relative overflow-hidden flex flex-col justify-between p-8 sm:p-10 lg:p-12 min-h-[340px] md:min-h-[640px] bg-[#07091e] text-white ${className}`}
     >
       {/* Dynamic Fluid Abstract Flowing-Wave Background (Pure CSS & SVG, zero heavy external assets) */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
@@ -153,4 +153,3 @@ export function AuthBrandPanel({ className = "" }: AuthBrandPanelProps) {
     </div>
   );
 }
-

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { PulsePointWordmark, MenuIcon, CloseIcon } from "@/components/ui/icons";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,6 +36,8 @@ export function SiteHeader() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
+    { label: "Join a Team", href: "/teams" },
+    { label: "Hackathons", href: "/hackathons" },
     { label: "How It Works", href: "#how-it-works" },
     { label: "Features", href: "#features" },
     { label: "AI Assistance", href: "#ai-assistance" },
@@ -58,19 +61,36 @@ export function SiteHeader() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1 sm:gap-2" aria-label="Main Navigation">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-neutral-300 hover:text-white px-3.5 py-1.5 rounded-lg transition-colors hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-neutral-300 hover:text-white px-3.5 py-1.5 rounded-lg transition-colors hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-neutral-300 hover:text-white px-3.5 py-1.5 rounded-lg transition-colors hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </nav>
 
         {/* Desktop CTA actions */}
         <div className="hidden md:flex items-center gap-3">
+          <Link
+            href="/teams/new"
+            className="text-sm font-semibold text-white px-4 py-1.5 rounded-xl btn-primary-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070709]"
+          >
+            Create a Team
+          </Link>
+          <ThemeToggle className="shrink-0" />
           <Link
             href="/sign-in"
             className="text-sm font-medium text-neutral-300 hover:text-white px-3.5 py-1.5 rounded-lg transition-colors hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
@@ -87,6 +107,7 @@ export function SiteHeader() {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">
+          <ThemeToggle className="mr-2" />
           <button
             ref={menuButtonRef}
             type="button"
@@ -112,19 +133,37 @@ export function SiteHeader() {
           className="md:hidden fixed inset-0 top-[70px] z-50 bg-[#070709]/95 backdrop-blur-2xl p-6 flex flex-col justify-between pointer-events-auto border-t border-white/10 animate-in fade-in duration-200"
         >
           <nav className="flex flex-col gap-2 pt-4" aria-label="Mobile Navigation">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={handleLinkClick}
-                className="text-lg font-medium text-neutral-200 hover:text-white px-4 py-3 rounded-xl hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.href.startsWith("/") ? (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={handleLinkClick}
+                  className="text-lg font-medium text-neutral-200 hover:text-white px-4 py-3 rounded-xl hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={handleLinkClick}
+                  className="text-lg font-medium text-neutral-200 hover:text-white px-4 py-3 rounded-xl hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </nav>
 
           <div className="flex flex-col gap-3 pb-8 pt-6 border-t border-white/10">
+            <Link
+              href="/teams/new"
+              onClick={handleLinkClick}
+              className="w-full text-center py-3 text-base font-semibold text-white rounded-xl btn-primary-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+            >
+              Create a Team
+            </Link>
             <Link
               href="/sign-in"
               onClick={handleLinkClick}
@@ -145,4 +184,3 @@ export function SiteHeader() {
     </header>
   );
 }
-

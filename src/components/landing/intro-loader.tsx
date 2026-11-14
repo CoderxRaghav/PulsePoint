@@ -105,12 +105,12 @@ export function IntroLoader({ onIntroComplete }: IntroLoaderProps) {
           >
             <defs>
               <linearGradient id="preloader-pulse-grad" x1="6" y1="24" x2="64" y2="24" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#E11D48" />
-                <stop offset="0.6" stopColor="#F43F5E" />
-                <stop offset="1" stopColor="#FB7185" />
+                <stop stopColor="var(--primary)" />
+                <stop offset="0.6" stopColor="var(--accent)" />
+                <stop offset="1" stopColor="var(--primary)" />
               </linearGradient>
               <filter id="preloader-glow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="0" stdDeviation="2.5" floodColor="#E11D48" floodOpacity="0.6" />
+                <feDropShadow dx="0" dy="0" stdDeviation="2.5" floodColor="var(--glow)" floodOpacity="0.6" />
               </filter>
             </defs>
 
@@ -172,16 +172,16 @@ export function IntroLoader({ onIntroComplete }: IntroLoaderProps) {
               style={{ transformOrigin: "74px 28px" }}
             >
               {/* Hub Node (Crimson) */}
-              <circle cx="64" cy="28" r="3.5" fill="#E11D48" />
-              <circle cx="64" cy="28" r="6" stroke="#E11D48" strokeWidth="1" opacity="0.4" />
+              <circle cx="64" cy="28" r="3.5" fill="var(--primary)" />
+              <circle cx="64" cy="28" r="6" stroke="var(--primary)" strokeWidth="1" opacity="0.4" />
 
               {/* Node 2: Teammate (Mint) */}
-              <circle cx="84" cy="14" r="3.5" fill="#10B981" />
-              <circle cx="84" cy="14" r="6" stroke="#10B981" strokeWidth="1" opacity="0.4" />
+              <circle cx="84" cy="14" r="3.5" fill="var(--accent)" />
+              <circle cx="84" cy="14" r="6" stroke="var(--accent)" strokeWidth="1" opacity="0.4" />
 
               {/* Node 3: Teammate (Violet) */}
-              <circle cx="84" cy="40" r="3.5" fill="#8B5CF6" />
-              <circle cx="84" cy="40" r="6" stroke="#8B5CF6" strokeWidth="1" opacity="0.4" />
+              <circle cx="84" cy="40" r="3.5" fill="var(--primary)" />
+              <circle cx="84" cy="40" r="6" stroke="var(--primary)" strokeWidth="1" opacity="0.4" />
             </g>
           </svg>
         </div>

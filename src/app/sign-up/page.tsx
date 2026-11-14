@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AuthBrandPanel } from "@/components/auth/auth-brand-panel";
 import { SignUpForm } from "@/components/auth/sign-up-form";
 import { ArrowRightIcon } from "@/components/ui/icons";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export const metadata: Metadata = {
   title: "Create Account — PulsePoint",
@@ -30,9 +31,12 @@ export default function SignUpPage() {
           </span>
           <span>Back to PulsePoint</span>
         </Link>
-        <span className="text-[11px] font-mono tracking-wider text-neutral-400 uppercase">
-          Student Platform
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="text-[11px] font-mono tracking-wider text-neutral-400 uppercase">
+            Student Platform
+          </span>
+          <ThemeToggle />
+        </div>
       </div>
 
       {/* Centered Split-Screen Authentication Card */}

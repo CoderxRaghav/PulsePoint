@@ -2,14 +2,16 @@
 
 import { useEffect, useState } from "react";
 
-export function ProfileCreatedToast({ uid }: { uid: string }) {
+export function ProfileCreatedToast({ uid }: { uid?: string }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const url = new URL(window.location.href);
-    if (url.searchParams.get("created") !== "1") return;
+    const isCreated = url.searchParams.get("created") === "1" || url.searchParams.get("profileCreated") === "true";
+    if (!isCreated) return;
 
-    const notificationKey = `pulsepoint-profile-created:${uid}`;
+    const key = uid || "user";
+    const notificationKey = `pulsepoint-profile-created:${key}`;
     let alreadyShown = false;
     try {
       alreadyShown = window.sessionStorage.getItem(notificationKey) === "shown";
@@ -19,6 +21,7 @@ export function ProfileCreatedToast({ uid }: { uid: string }) {
     }
 
     url.searchParams.delete("created");
+    url.searchParams.delete("profileCreated");
     window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
     if (!alreadyShown) queueMicrotask(() => setVisible(true));
   }, [uid]);

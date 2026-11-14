@@ -129,10 +129,10 @@ export function SpaceBackground({ className = "" }: SpaceBackgroundProps) {
           - Side feathering on ultra-wide screens to gently blend edges.
           - Bottom feathering melting globe smoothly into charcoal section below.
       */}
-      <div className="absolute inset-x-0 top-0 h-44 sm:h-64 bg-gradient-to-b from-[#070709] via-[#070709]/70 to-transparent pointer-events-none" />
-      <div className="absolute inset-y-0 left-0 w-20 sm:w-48 bg-gradient-to-r from-[#070709] to-transparent pointer-events-none opacity-80" />
-      <div className="absolute inset-y-0 right-0 w-20 sm:w-48 bg-gradient-to-l from-[#070709] to-transparent pointer-events-none opacity-80" />
-      <div className="absolute inset-x-0 bottom-0 h-48 sm:h-72 bg-gradient-to-t from-[#070709] via-[#070709]/70 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-44 sm:h-64 bg-gradient-to-b from-[#eff6ff] via-[#eff6ff]/70 to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-20 sm:w-48 bg-gradient-to-r from-[#eff6ff] to-transparent pointer-events-none opacity-80" />
+      <div className="absolute inset-y-0 right-0 w-20 sm:w-48 bg-gradient-to-l from-[#eff6ff] to-transparent pointer-events-none opacity-80" />
+      <div className="absolute inset-x-0 bottom-0 h-48 sm:h-72 bg-gradient-to-t from-[#f8fafc] via-[#f8fafc]/70 to-transparent pointer-events-none" />
     </div>
   );
 }

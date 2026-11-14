@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { PulsePointWordmark, MenuIcon, CloseIcon } from "@/components/ui/icons";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 interface ProfileSidebarProps {
   pathname: string;
@@ -37,6 +38,7 @@ export function ProfileSidebar({
         </Link>
 
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-rose-300">
             <span className="font-semibold">{completion}%</span>
             <span className="text-[10px] text-neutral-400">ready</span>
@@ -136,6 +138,7 @@ export function ProfileSidebar({
         <Link href="/" className="mb-10 inline-flex items-center gap-2 text-lg font-bold">
           <PulsePointWordmark markClassName="w-7 h-7" className="text-lg" />
         </Link>
+        <ThemeToggle className="mb-8 self-start" />
 
         <p className="mb-3 text-[10px] font-semibold uppercase tracking-[.18em] text-neutral-500">
           Workspace

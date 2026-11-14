@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lora } from "next/font/google";
 import "./globals.css";
 import { AuthInitializer } from "@/components/auth/auth-initializer";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -21,10 +22,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark scroll-smooth ${lora.variable}`}>
+    <html lang="en" className={`scroll-smooth ${lora.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("pulsepoint-theme");t=t==="dark"?"dark":"light";document.documentElement.dataset.theme=t;document.documentElement.classList.toggle("dark",t==="dark");document.documentElement.style.colorScheme=t}catch(e){document.documentElement.dataset.theme="light";document.documentElement.style.colorScheme="light"}`,
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-space-black text-warm-white antialiased selection:bg-crimson/30 selection:text-white">
-        <AuthInitializer />
-        {children}
+        <ThemeProvider>
+          <AuthInitializer />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -22,12 +22,12 @@ export function PulsePointIcon({ className = "w-6 h-6", size, ...props }: IconPr
     >
       <defs>
         <linearGradient id="pulse-grad" x1="2" y1="16" x2="30" y2="16" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#E11D48" />
-          <stop offset="0.6" stopColor="#F43F5E" />
-          <stop offset="1" stopColor="#34D399" />
+          <stop stopColor="var(--primary)" />
+          <stop offset="0.6" stopColor="var(--accent)" />
+          <stop offset="1" stopColor="var(--primary)" />
         </linearGradient>
         <filter id="glow-pulse" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="0" stdDeviation="2" floodColor="#E11D48" floodOpacity="0.5" />
+          <feDropShadow dx="0" dy="0" stdDeviation="2" floodColor="var(--glow)" floodOpacity="0.5" />
         </filter>
       </defs>
       {/* Pulse trajectory */}
@@ -40,12 +40,12 @@ export function PulsePointIcon({ className = "w-6 h-6", size, ...props }: IconPr
         filter="url(#glow-pulse)"
       />
       {/* Connected teammate nodes */}
-      <circle cx="22" cy="18" r="2.2" fill="#F43F5E" />
-      <circle cx="28" cy="12" r="2.4" fill="#34D399" />
-      <circle cx="28" cy="22" r="2.4" fill="#8B5CF6" />
+      <circle cx="22" cy="18" r="2.2" fill="var(--primary)" />
+      <circle cx="28" cy="12" r="2.4" fill="var(--accent)" />
+      <circle cx="28" cy="22" r="2.4" fill="var(--primary)" />
       {/* Node connecting links */}
-      <line x1="22" y1="18" x2="28" y2="12" stroke="rgba(255,255,255,0.4)" strokeWidth="1.2" strokeDasharray="1.5 1.5" />
-      <line x1="22" y1="18" x2="28" y2="22" stroke="rgba(255,255,255,0.4)" strokeWidth="1.2" strokeDasharray="1.5 1.5" />
+      <line x1="22" y1="18" x2="28" y2="12" stroke="var(--border)" strokeWidth="1.2" strokeDasharray="1.5 1.5" />
+      <line x1="22" y1="18" x2="28" y2="22" stroke="var(--border)" strokeWidth="1.2" strokeDasharray="1.5 1.5" />
     </svg>
   );
 }
@@ -197,6 +197,23 @@ export function CloseIcon({ className = "w-6 h-6", ...props }: IconProps) {
   );
 }
 
+export function SunIcon({ className = "w-5 h-5", ...props }: IconProps) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true" {...props}>
+      <circle cx="12" cy="12" r="4" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+    </svg>
+  );
+}
+
+export function MoonIcon({ className = "w-5 h-5", ...props }: IconProps) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M20.5 15.5A8.5 8.5 0 018.5 3.5a8.6 8.6 0 1012 12z" />
+    </svg>
+  );
+}
+
 export function GithubIcon({ className = "w-5 h-5", ...props }: IconProps) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" {...props}>
@@ -209,6 +226,72 @@ export function ExternalLinkIcon({ className = "w-4 h-4", ...props }: IconProps)
   return (
     <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true" {...props}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+    </svg>
+  );
+}
+
+export function GlobeIcon({ className = "w-4 h-4", ...props }: IconProps) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.6 9h16.8M3.6 15h16.8" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M11.5 3a17 17 0 000 18 17 17 0 000-18z" />
+    </svg>
+  );
+}
+
+export function CalendarIcon({ className = "w-4 h-4", ...props }: IconProps) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+    </svg>
+  );
+}
+
+export function AwardIcon({ className = "w-4 h-4", ...props }: IconProps) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.504-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.004 0A5.25 5.25 0 0017.25 9V4.5H6.75V9a5.25 5.25 0 004.5 5.25" />
+    </svg>
+  );
+}
+
+export function SearchIcon({ className = "w-4 h-4", ...props }: IconProps) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+    </svg>
+  );
+}
+
+export function RefreshCwIcon({ className = "w-4 h-4", ...props }: IconProps) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+    </svg>
+  );
+}
+
+export function AlertCircleIcon({ className = "w-4 h-4", ...props }: IconProps) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+    </svg>
+  );
+}
+
+export function FilterIcon({ className = "w-4 h-4", ...props }: IconProps) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+    </svg>
+  );
+}
+
+export function XIcon({ className = "w-4 h-4", ...props }: IconProps) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
   );
 }

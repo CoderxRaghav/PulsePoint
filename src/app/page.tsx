@@ -8,10 +8,13 @@ import { Features } from "@/components/landing/features";
 import { AiPreview } from "@/components/landing/ai-preview";
 import { FinalCta } from "@/components/landing/final-cta";
 import { SiteFooter } from "@/components/landing/site-footer";
+import { ProfileCreatedToast } from "@/components/profile/profile-created-toast";
 
 export default function LandingPage() {
   return (
-    <>
+    <div className="landing-page">
+      {/* Toast Notification when returning from Profile Creation */}
+      <ProfileCreatedToast />
       {/* Skip to Content Link for Keyboard & Screen Reader Accessibility */}
       <a
         href="#main-content"
@@ -38,6 +41,6 @@ export default function LandingPage() {
 
       {/* Comprehensive Site Footer */}
       <SiteFooter />
-    </>
+    </div>
   );
 }

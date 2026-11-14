@@ -123,7 +123,8 @@ export async function saveStudentProfile(user: User, profile: StudentProfile, cr
 }
 
 export async function profileDestination(user: User) {
-  return (await getStudentProfile(user)) ? "/profile" : "/profile/setup";
+  const profile = await getStudentProfile(user);
+  return profile?.completed ? "/" : "/profile/setup";
 }
 
 /**

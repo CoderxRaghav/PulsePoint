@@ -2,7 +2,7 @@
 
 PulsePoint is a student-focused teammate discovery and project collaboration platform designed to help builders discover complementary peers, form agile squads, explore hackathons, and turn project ideas into shipped software.
 
-This repository contains the PulsePoint landing experience, Firebase Authentication, Supabase PostgreSQL profile database, and Supabase Storage profile picture uploads.
+This repository contains the PulsePoint landing experience, Firebase Authentication, Supabase PostgreSQL profile and hackathon metadata, and Supabase Storage profile picture uploads.
 
 ---
 
@@ -10,9 +10,9 @@ This repository contains the PulsePoint landing experience, Firebase Authenticat
 
 - **Frontend & Routing:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4.
 - **Authentication & User Identity:** Firebase Authentication (Google & GitHub OAuth). The Firebase UID serves as the immutable user identity.
-- **Database:** Supabase PostgreSQL (`public.profiles` table with JSONB document schema and timestamps).
-- **File & Media Storage:** Supabase Storage (`profile-photos` public bucket).
-- **Backend APIs:** Next.js Route Handlers (`/api/profile`, `/api/profile/avatar`) with server-side Firebase ID token verification via `firebase-admin`.
+- **Database:** Supabase PostgreSQL (`public.profiles` plus normalized team, project, membership, requirement, and join-request tables).
+- **File & Media Storage:** Supabase Storage (`profile-photos` and `team-logos` public buckets).
+- **Backend APIs:** Next.js Route Handlers with server-side Firebase ID token verification via `firebase-admin`.
 
 ---
 
@@ -50,6 +50,9 @@ NEXT_PUBLIC_FIREBASE_GITHUB_CLIENT_ID=your_github_client_id
 
 1. **Profiles Table:** Apply the migration in [`supabase/migrations/20261102000000_create_profiles.sql`](./supabase/migrations/20261102000000_create_profiles.sql).
 2. **Storage Bucket:** Create a public bucket named `profile-photos` with a 5 MB file size limit and allowed MIME types (`image/jpeg`, `image/png`, `image/webp`, `image/gif`).
+3. **Hackathon cache:** Apply `supabase/migrations/20261107000000_create_hackathons_aggregator.sql` followed by `supabase/migrations/20261107190000_harden_hackathons_sync.sql`. Event rows are a lightweight cache of externally sourced listings; bookmarks are separate and retained when an event is archived.
+4. **Source permissions:** See [`docs/hackathons-sources.md`](./docs/hackathons-sources.md). Connectors remain disabled until an authorized API/feed or written permission is documented. Public pages, reachable endpoints, and robots.txt directives alone do not grant ingestion rights. No paid provider is approved.
+5. **Team formation:** Apply [`supabase/migrations/20261112000000_create_team_formation.sql`](./supabase/migrations/20261112000000_create_team_formation.sql) after the migrations above. The migration creates the normalized team schema, server-only transactional functions, RLS protections, and the optional team-logo bucket. See [`docs/team-formation.md`](./docs/team-formation.md) for the workflow and security model.
 
 ---
 
@@ -80,6 +83,14 @@ NEXT_PUBLIC_FIREBASE_GITHUB_CLIENT_ID=your_github_client_id
 - Real-time profile completion percentage indicator.
 - Live companion preview card.
 - Draft saving support (`Save draft` preserves progress before publishing).
+
+### 4. Team Formation & Discovery
+- `/teams` provides live team discovery, skill-based recommendations, filters, and newest/recruiting teams.
+- `/teams/new` creates the team, project, first membership, and required skills transactionally.
+- `/teams/[id]` shows the project, team members, recruitment details, and join-request workflow.
+- `/teams/mine` shows memberships and request statuses; team leads can review requests, edit, archive/delete, manage members, and transfer leadership.
+- Join requests are never direct membership changes. A PostgreSQL transaction rechecks team status and capacity before an accepted request adds a member.
+- Setup and server-only credentials are documented in [`docs/team-formation.md`](./docs/team-formation.md).
 
 ## Getting Started
 

@@ -6,7 +6,7 @@ export function FinalCta() {
   return (
     <section className="relative py-20 sm:py-28 overflow-hidden">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="relative rounded-3xl glass-panel p-8 sm:p-14 text-center border border-white/10 overflow-hidden shadow-2xl">
+        <div className="landing-cta-card relative rounded-3xl glass-panel p-8 sm:p-14 text-center border border-white/10 overflow-hidden shadow-2xl">
           {/* Subtle background glow */}
           <div className="absolute inset-0 bg-radial from-rose-500/15 via-violet-600/10 to-transparent blur-3xl pointer-events-none" />
 
@@ -43,4 +43,3 @@ export function FinalCta() {
     </section>
   );
 }
-

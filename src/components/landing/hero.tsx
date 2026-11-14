@@ -5,9 +5,9 @@ import { SpaceBackground } from "@/components/landing/space-background";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[90vh] lg:min-h-screen flex flex-col justify-between pt-28 sm:pt-36 pb-12 sm:pb-20 overflow-hidden">
+    <section className="landing-hero relative min-h-[90vh] lg:min-h-screen flex flex-col justify-between pt-28 sm:pt-36 pb-12 sm:pb-20 overflow-hidden">
       {/* Decorative Video & Fallback Planet Canvas */}
-      <SpaceBackground />
+      <SpaceBackground className="landing-hero-background" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center">
         {/* Announcement Pill with Liquid-Glass styling */}
@@ -29,18 +29,24 @@ export function Hero() {
           Discover complementary skills, form your team, find hackathons, and turn your next project into a shared achievement.
         </p>
 
-        {/* Primary and Secondary Action CTAs */}
+        {/* Team creation and discovery are directly available from the landing page. */}
         <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
           <Link
-            href="/sign-up"
+            href="/teams"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-medium text-white btn-primary-glow text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070709]"
           >
-            <span>Find Your Team</span>
+            <span>Join a Team</span>
             <ArrowRightIcon className="w-4 h-4" />
+          </Link>
+          <Link
+            href="/teams/new"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-medium text-neutral-200 hover:text-white glass-panel-subtle hover:bg-white/10 transition-colors text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+          >
+            <span>Create a Team</span>
           </Link>
           <a
             href="#how-it-works"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-medium text-neutral-200 hover:text-white glass-panel-subtle hover:bg-white/10 transition-colors text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-medium text-neutral-300 hover:text-white transition-colors text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
           >
             <span>See How It Works</span>
           </a>
@@ -65,4 +71,3 @@ export function Hero() {
     </section>
   );
 }
-

@@ -208,3 +208,4 @@ export function ProfileView({ profile, onEdit, completion }: ProfileViewProps) {
     </div>
   );
 }
+

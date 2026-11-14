@@ -15,6 +15,7 @@ import { ProfileCreatedToast } from "@/components/profile/profile-created-toast"
 import { ProfileSidebar } from "@/components/profile/profile-sidebar";
 import { ProfileView } from "@/components/profile/profile-view";
 import { ProfileForm } from "@/components/profile/profile-form";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function ProfileApp() {
   const pathname = usePathname();
@@ -222,7 +223,11 @@ export function ProfileApp() {
       setMessage(complete ? "Profile saved." : "Draft saved. You can finish it anytime.");
 
       if (complete) {
-        router.push(justCompleted ? "/profile?created=1" : "/profile");
+        if (isSetup || justCompleted) {
+          router.push("/?profileCreated=true");
+        } else {
+          router.push("/profile");
+        }
       }
     } catch (error) {
       setMessage(
@@ -237,6 +242,7 @@ export function ProfileApp() {
   if (loading || !user) {
     return (
       <main className="min-h-screen bg-[#070709] p-8 text-neutral-300">
+        <ThemeToggle className="fixed right-4 top-4" />
         {!isFirebaseConfigured
           ? "Firebase is not configured. Add your Firebase credentials to sign in."
           : "Loading your profile…"}
@@ -247,6 +253,7 @@ export function ProfileApp() {
   if (!profile) {
     return (
       <main className="min-h-screen bg-[#070709] p-8 text-neutral-300">
+        <ThemeToggle className="fixed right-4 top-4" />
         <div className="mx-auto max-w-xl rounded-2xl border border-white/10 bg-[#12131b] p-6">
           <p role="alert">{message || "Could not load your profile."}</p>
           <div className="mt-5 flex flex-wrap gap-3">

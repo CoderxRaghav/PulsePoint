@@ -53,7 +53,10 @@ export function SignUpForm() {
     if (routingForUid.current === user.uid) return;
     routingForUid.current = user.uid;
     try {
-      router.replace(await profileDestination(user));
+      const destination = await profileDestination(user);
+      const next = new URLSearchParams(window.location.search).get("next");
+      const isSafeReturnPath = Boolean(next && next.startsWith("/") && !next.startsWith("//") && !next.startsWith("/sign-"));
+      router.replace(destination === "/profile/setup" || !isSafeReturnPath ? destination : next!);
     } catch (error) {
       routingForUid.current = null;
       setStatusMessage({
