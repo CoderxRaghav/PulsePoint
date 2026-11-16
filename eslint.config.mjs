@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Live E2E runner scripts are CommonJS (require), not app code:
+    "tests/e2e/**",
   ]),
 ]);
 
