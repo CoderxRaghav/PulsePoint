@@ -63,8 +63,8 @@ export async function GET(request: NextRequest) {
     if (matchingIds) teamQuery = teamQuery.in("id", matchingIds);
 
     const orderedQuery = sortBy === "positions"
-      ? teamQuery.order("positions_open", { ascending: false }).order("created_at", { ascending: false })
-      : teamQuery.order("created_at", { ascending: false });
+      ? teamQuery.order("positions_open", { ascending: false }).order("created_at", { ascending: false }).order("id", { ascending: false })
+      : teamQuery.order("created_at", { ascending: false }).order("id", { ascending: false });
     const { data, error, count } = await orderedQuery.range(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE - 1);
     if (error) throw error;
 

@@ -7,6 +7,8 @@ import { useCallback, useEffect, useMemo, useState, type ChangeEvent, type React
 import type { User } from "firebase/auth";
 import { TeamHeader } from "@/components/teams/team-header";
 import { TeamForm, type TeamFormPayload } from "@/components/teams/team-form";
+import { SuggestedTeammates } from "@/components/teams/suggested-teammates";
+import { TaskBoard } from "@/components/teams/task-board";
 import { subscribeToAuthChanges } from "@/lib/firebase";
 import { teamRequest } from "@/lib/team-client";
 import type { TeamDetails as TeamDetailsData, TeamRequest } from "@/lib/team-types";
@@ -406,6 +408,9 @@ export function TeamDetails({ teamId, created = false }: { teamId: string; creat
                         <div className="min-w-0 flex-1">
                           <p className="font-semibold">{member.full_name} {member.role === "Team Lead" && <span className="ml-1 text-xs text-crimson">Team lead</span>}</p>
                           <p className="text-xs text-warm-white-muted">{member.role}{member.college ? ` · ${member.college}` : ""}{member.headline ? ` · ${member.headline}` : ""}</p>
+                          {(member.availability || member.collaboration.length > 0) && (
+                            <p className="mt-1 text-xs text-warm-white-muted">Availability: <span className="text-warm-white">{member.availability || "Not listed"}</span>{member.collaboration.length > 0 ? ` · ${member.collaboration.join(", ")}` : ""}</p>
+                          )}
                           {member.skills.length > 0 && <p className="mt-1 text-xs text-warm-white-muted">Skills: {member.skills.join(", ")}</p>}
                         </div>
                         {isLeader && member.user_uid !== user?.uid && (
@@ -424,6 +429,10 @@ export function TeamDetails({ teamId, created = false }: { teamId: string; creat
                   )}
                   {isMember && !isLeader && <button type="button" disabled={busy} onClick={() => void manageMember(user!.uid)} className="mt-5 rounded-lg border border-charcoal-700 px-3 py-2 text-sm font-semibold text-warm-white-muted hover:border-rose-500/30 hover:text-rose-600">Leave team</button>}
                 </section>
+
+                {isMember && (
+                  <TaskBoard user={user!} teamId={team.id} members={team.members} isLeader={isLeader} canEdit={!team.archived_at} />
+                )}
               </div>
 
               <aside className="space-y-6">
@@ -452,6 +461,10 @@ export function TeamDetails({ teamId, created = false }: { teamId: string; creat
                     <p className="mt-2">Collaboration: <span className="text-warm-white">{team.collaboration_preferences.join(", ") || "Flexible"}</span></p>
                   </div>
                 </section>
+
+                {isLeader && !team.archived_at && (
+                  <SuggestedTeammates user={user} teamId={team.id} recruiting={team.recruitment_status === "open" && team.positions_open > 0} />
+                )}
 
                 {isLeader && !team.archived_at && (
                   <section className={panelClass}>

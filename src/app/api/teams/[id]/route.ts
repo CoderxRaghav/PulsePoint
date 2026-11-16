@@ -65,7 +65,12 @@ export async function GET(
       : new Set(viewerIsMember && viewerUid ? [viewerUid] : []);
     const team = toTeamSummary(teamRow, profileByUid.get(leaderUid));
     const teamMembers = members.map((member) =>
-      toTeamMember(member, profileByUid.get(typeof member.user_uid === "string" ? member.user_uid : ""), visibleUids),
+      toTeamMember(
+        member,
+        profileByUid.get(typeof member.user_uid === "string" ? member.user_uid : ""),
+        visibleUids,
+        viewerIsMember,
+      ),
     );
     return teamJson({ team: { ...team, members: teamMembers } });
   } catch (error) {
