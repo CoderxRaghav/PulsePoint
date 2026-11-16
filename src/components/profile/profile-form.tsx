@@ -345,7 +345,7 @@ export function ProfileForm({
                             patchProfile({ skills: profile.skills.filter((x) => x !== skill) })
                           }
                         >
-                          {skill.name} <span className="text-rose-200/60">· {skillLevel}</span>
+                          {skill.name} <span className="text-rose-200/60">· {skill.level}</span>
                         </Chip>
                       ))}
                   </div>

@@ -25,7 +25,7 @@ export function FinalCta() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/sign-up"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-medium text-white btn-primary-glow text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070709]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-medium btn-primary-glow text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070709]"
             >
               <span>Create Your Profile</span>
               <ArrowRightIcon className="w-4 h-4" />

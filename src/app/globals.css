@@ -698,9 +698,23 @@ html[data-theme="light"] .text-white[class*="bg-violet-"],
 html[data-theme="light"] .text-white[class*="bg-emerald-"],
 html[data-theme="light"] .text-white[class*="bg-indigo-"],
 html[data-theme="light"] .text-white[class*="bg-slate-"],
-html[data-theme="light"] .landing-cta-card .text-white,
-html[data-theme="light"] .landing-cta-card .btn-primary-glow {
+html[data-theme="light"] .landing-cta-card .text-white {
   color: #fff !important;
+}
+
+/* Light theme: the CTA card's own button is white-on-blue in dark mode, but a
+   white button on the blue card in light mode — the text must stay dark there. */
+html[data-theme="light"] .landing-cta-card .btn-primary-glow,
+html[data-theme="light"] .landing-cta-card .btn-primary-glow:hover,
+html[data-theme="light"] .landing-cta-card .btn-primary-glow:focus-visible,
+html[data-theme="light"] .landing-cta-card .btn-primary-glow:active {
+  background: var(--surface);
+  color: #253b80 !important;
+  border: 1px solid color-mix(in srgb, #253b80 18%, transparent);
+}
+html[data-theme="light"] .landing-cta-card .btn-primary-glow:hover {
+  color: #1d3264 !important;
+  box-shadow: 0 0 24px color-mix(in srgb, var(--glow) 32%, transparent);
 }
 
 html[data-theme="light"] [class*="via-[#181926]"],

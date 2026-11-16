@@ -489,12 +489,12 @@ export function SignUpForm() {
         {/* Guidelines / Privacy Acknowledgement */}
         <p className="text-xs text-slate-500 leading-relaxed pt-0.5">
           By creating an account, you agree to our{" "}
-          <Link href="/#how-it-works" className="text-rose-600 hover:underline">
+          <Link href="/legal#guidelines" className="text-rose-600 hover:underline">
             Community Guidelines
           </Link>{" "}
           and acknowledge our{" "}
-          <Link href="/#features" className="text-rose-600 hover:underline">
-            Privacy Policy
+          <Link href="/legal#privacy" className="text-rose-600 hover:underline">
+            Privacy Notice
           </Link>
           .
         </p>

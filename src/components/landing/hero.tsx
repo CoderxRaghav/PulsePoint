@@ -56,7 +56,7 @@ export function Hero() {
         <div className="mt-12 sm:mt-16 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-neutral-300">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/40 border border-white/10 backdrop-blur-sm">
             <UsersIcon className="w-4 h-4 text-emerald-400" />
-            <span>Explainable matches</span>
+            <span>Explainable matching (rules-based)</span>
           </div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/40 border border-white/10 backdrop-blur-sm">
             <LayersIcon className="w-4 h-4 text-violet-400" />
@@ -64,7 +64,7 @@ export function Hero() {
           </div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/40 border border-white/10 backdrop-blur-sm">
             <ShieldIcon className="w-4 h-4 text-rose-400" />
-            <span>AI-assisted planning</span>
+            <span>Safety-first by default</span>
           </div>
         </div>
       </div>

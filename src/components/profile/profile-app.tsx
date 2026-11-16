@@ -39,6 +39,7 @@ export function ProfileApp() {
   const [photoPreview, setPhotoPreview] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [profileExists, setProfileExists] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
   const saveInFlight = useRef(false);
 
   // Subscribe to Firebase Auth state
@@ -90,7 +91,7 @@ export function ProfileApp() {
     return () => {
       alive = false;
     };
-  }, [user, isForm, isSetup, router]);
+  }, [user, isForm, isSetup, router, retryCount]);
 
   const completion = useMemo(() => {
     if (!profile) return 0;
@@ -262,6 +263,7 @@ export function ProfileApp() {
               onClick={() => {
                 setLoading(true);
                 setMessage("");
+                setRetryCount((count) => count + 1);
               }}
               className="rounded-xl border border-white/15 px-4 py-2 text-sm hover:bg-white/5 transition"
             >

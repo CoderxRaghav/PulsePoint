@@ -23,7 +23,7 @@ export function HowItWorks() {
       step: "03",
       title: "Form a team and start building",
       description:
-        "Establish your team workspace, align on shared milestones, track tasks, and turn ideas into working projects.",
+        "List the roles and skills you need, review applicants, and coordinate in one shared space. Task tracking and milestones ship with the collaboration milestone.",
       icon: LayersIcon,
       badgeColor: "text-violet-400 border-violet-500/20 bg-violet-500/10",
     },

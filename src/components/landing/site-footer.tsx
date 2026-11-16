@@ -33,7 +33,8 @@ export function SiteFooter() {
               PulsePoint is a student teammate discovery and project collaboration platform designed to help builders find complementary collaborators and ship meaningful projects.
             </p>
             <p className="text-xs text-neutral-500">
-              Phase 1 Frontend Milestone — Educational student platform in development.
+              Student teammate discovery &amp; project collaboration — built in the open.{" "}
+              <Link href="/legal" className="underline underline-offset-2 hover:text-white transition-colors">Privacy &amp; Guidelines</Link>
             </p>
           </div>
 
@@ -90,7 +91,7 @@ export function SiteFooter() {
                   onClick={() => setActiveModal("privacy")}
                   className="hover:text-white transition-colors text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-rose-500 rounded"
                 >
-                  Privacy (Draft)
+                  Privacy Notice
                 </button>
               </li>
               <li>
@@ -99,7 +100,7 @@ export function SiteFooter() {
                   onClick={() => setActiveModal("guidelines")}
                   className="hover:text-white transition-colors text-left focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-rose-500 rounded"
                 >
-                  Community Guidelines (Draft)
+                  Community Guidelines
                 </button>
               </li>
               <li>
@@ -154,23 +155,25 @@ export function SiteFooter() {
             {activeModal === "privacy" && (
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-rose-400">
-                  DRAFT POLICY — PLATFORM IN DEVELOPMENT
+                  PRIVACY NOTICE
                 </span>
                 <h3 id="modal-heading" className="text-xl font-bold text-white mt-1 mb-4">
-                  Privacy Policy (Working Draft)
+                  What PulsePoint stores
                 </h3>
                 <div className="text-sm text-neutral-300 space-y-3 leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
                   <p>
-                    PulsePoint is currently in its initial frontend prototype phase. This draft policy outlines planned privacy principles:
+                    PulsePoint stores your Firebase account identity, the profile you write, your team memberships and join requests, and hackathon bookmarks — nothing else, and nothing without you signing in.
                   </p>
                   <ul className="list-disc pl-5 space-y-1.5 text-neutral-400">
-                    <li>Student contact information and real names will only be displayed according to chosen visibility settings.</li>
-                    <li>No personal data or passwords are collected or stored in this frontend milestone.</li>
-                    <li>Third-party telemetry is minimized to essential platform performance checks.</li>
+                    <li>Passwords are handled by Firebase Authentication; PulsePoint never sees them.</li>
+                    <li>Your profile is visible to students only while your “Visible to students” setting is on.</li>
+                    <li>Matching uses rules-based scoring of visible fields — never sensitive traits, never personality.</li>
+                    <li>No advertising, no sale of data, no third-party tracking pixels.</li>
+                    <li>Account deletion is a manual request via GitHub Issues until in-app deletion ships.</li>
                   </ul>
-                  <p className="text-xs text-neutral-500 pt-2">
-                    Note: Final legal policies are pending review and approval before full platform launch.
-                  </p>
+                  <Link href="/legal#privacy" className="inline-block pt-2 text-rose-400 hover:text-rose-300 underline underline-offset-2 text-sm">
+                    Read the full privacy notice →
+                  </Link>
                 </div>
               </div>
             )}
@@ -178,23 +181,25 @@ export function SiteFooter() {
             {activeModal === "guidelines" && (
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-emerald-400">
-                  DRAFT GUIDELINES — PLATFORM IN DEVELOPMENT
+                  COMMUNITY GUIDELINES
                 </span>
                 <h3 id="modal-heading" className="text-xl font-bold text-white mt-1 mb-4">
-                  Community Guidelines (Working Draft)
+                  How we expect students to treat each other
                 </h3>
                 <div className="text-sm text-neutral-300 space-y-3 leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
                   <p>
-                    PulsePoint aims to provide an inclusive, welcoming space for student builders of all experience levels:
+                    PulsePoint is a working platform for student builders, not a prototype demo:
                   </p>
                   <ul className="list-disc pl-5 space-y-1.5 text-neutral-400">
-                    <li>Respect all collaborators regardless of skill level, background, or university affiliation.</li>
-                    <li>Honest communication regarding skills, availability, and project commitments.</li>
-                    <li>Zero tolerance for harassment, discrimination, or abusive conduct during team formation.</li>
+                    <li>Be honest about skills, availability, and commitments.</li>
+                    <li>Respect every collaborator — any skill level, any college.</li>
+                    <li>Zero tolerance for harassment, discrimination, or impersonation — report via GitHub Issues.</li>
+                    <li>Matches are suggestions, not verdicts. Dismiss them freely.</li>
+                    <li>Don’t spam discovery or harvest contact details.</li>
                   </ul>
-                  <p className="text-xs text-neutral-500 pt-2">
-                    Note: Complete enforcement procedures and reporting guidelines will be published with backend milestone integration.
-                  </p>
+                  <Link href="/legal#guidelines" className="inline-block pt-2 text-emerald-400 hover:text-emerald-300 underline underline-offset-2 text-sm">
+                    Read the full community guidelines →
+                  </Link>
                 </div>
               </div>
             )}
@@ -213,7 +218,18 @@ export function SiteFooter() {
                   </p>
                   <div className="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2">
                     <p className="text-xs font-mono text-neutral-300">
-                      GitHub Repository:{" "}
+                      Report a bug, correction, or abuse:{" "}
+                      <a
+                        href="https://github.com/CoderxRaghav/PulsePoint/issues"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-rose-400 hover:underline"
+                      >
+                        GitHub Issues
+                      </a>
+                    </p>
+                    <p className="text-xs text-neutral-400">
+                      Account deletion requests also go here until in-app deletion ships. PulsePoint is an open student initiative — the repository is{" "}
                       <a
                         href="https://github.com/CoderxRaghav/PulsePoint"
                         target="_blank"
@@ -221,10 +237,7 @@ export function SiteFooter() {
                         className="text-rose-400 hover:underline"
                       >
                         github.com/CoderxRaghav/PulsePoint
-                      </a>
-                    </p>
-                    <p className="text-xs text-neutral-400">
-                      Submit feature proposals or technical issues via GitHub Issues.
+                      </a>.
                     </p>
                   </div>
                 </div>

@@ -57,7 +57,7 @@ export function AiPreview() {
             <div className="lg:col-span-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/15 border border-violet-500/30 text-xs font-semibold text-violet-300 mb-4">
                 <SparklesIcon className="w-3.5 h-3.5 text-violet-400" />
-                <span>AI-Assisted Scaffolding</span>
+                <span>AI-Assisted Scaffolding — in development</span>
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4 leading-tight">
@@ -65,7 +65,7 @@ export function AiPreview() {
               </h2>
 
               <p className="text-base text-neutral-300 mb-6 leading-relaxed">
-                PulsePoint provides context-aware guidance designed for hackathon squads and student projects. Transform unstructured brainstorms into actionable execution plans.
+                A preview of what’s coming for hackathon squads and student projects: context-aware guidance that turns unstructured brainstorms into actionable plans. Not live yet — matching today is rules-based, explainable, and works without AI.
               </p>
 
               {/* Three concise capabilities */}
@@ -103,8 +103,8 @@ export function AiPreview() {
 
               {/* Guardrail Guarantee */}
               <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 text-xs text-neutral-300">
-                <span className="font-semibold text-rose-400">Student Guarantee: </span>
-                AI suggestions stay editable. You decide what gets saved.
+                <span className="font-semibold text-rose-400">Design intent — Student Guarantee: </span>
+                AI suggestions will stay editable. You decide what gets saved.
               </div>
             </div>
 
@@ -156,7 +156,7 @@ export function AiPreview() {
                 {/* Step controls */}
                 <div className="flex items-center justify-between pt-4 mt-4 border-t border-white/10 text-xs">
                   <span className="text-neutral-400">
-                    Click through the four stages of AI-assisted planning.
+                    Preview of planned AI assistance — no AI backend is live yet.
                   </span>
                   <button
                     type="button"
