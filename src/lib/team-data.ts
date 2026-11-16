@@ -30,12 +30,17 @@ export function profileDetails(profileValue: unknown) {
         return [];
       })
     : [];
+  const collaboration = Array.isArray(profile.collaboration)
+    ? profile.collaboration.filter((item): item is string => typeof item === "string" && item.trim().length > 0)
+    : [];
   return {
     fullName: visible && typeof profile.fullName === "string" ? profile.fullName : "Private member",
     photoUrl: visible && typeof profile.photoUrl === "string" ? profile.photoUrl : null,
     headline: visible && typeof profile.headline === "string" ? profile.headline : "",
     college: visible && typeof profile.college === "string" ? profile.college : "",
     skills: visible ? skills : [],
+    hoursPerWeek: visible && typeof profile.hoursPerWeek === "string" ? profile.hoursPerWeek : null,
+    collaboration: visible ? collaboration : [],
   };
 }
 
@@ -94,6 +99,7 @@ export function toTeamMember(
   row: Record<string, unknown>,
   profileValue: unknown,
   visibleUids: ReadonlySet<string> = new Set(),
+  rosterVisible = false,
 ): TeamMember {
   const profile = profileDetails(profileValue);
   const userUid = text(row.user_uid);
@@ -106,5 +112,7 @@ export function toTeamMember(
     headline: profile.headline,
     college: profile.college,
     skills: profile.skills,
+    availability: rosterVisible ? profile.hoursPerWeek : null,
+    collaboration: rosterVisible ? profile.collaboration : [],
   };
 }

@@ -1,0 +1,762 @@
+[
+  {
+    "uid": "fixture-001",
+    "fullName": "Aarav Sharma",
+    "headline": "AI/ML student builder",
+    "college": "IIT Delhi",
+    "skills": [
+      {
+        "name": "AI/ML",
+        "level": "Experienced"
+      },
+      {
+        "name": "React",
+        "level": "Experienced"
+      },
+      {
+        "name": "Python",
+        "level": "Experienced"
+      },
+      {
+        "name": "UI/UX",
+        "level": "Comfortable"
+      }
+    ],
+    "roles": [
+      "AI / ML Engineer",
+      "Frontend Developer"
+    ],
+    "interests": [
+      "climate technology",
+      "machine learning",
+      "open source"
+    ],
+    "buildGoal": "Building climate intelligence tools with machine learning",
+    "hoursPerWeek": "10+ hours",
+    "duration": "8 weeks",
+    "collaboration": [
+      "Remote",
+      "Async"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-002",
+    "fullName": "Diya Patel",
+    "headline": "Frontend developer",
+    "college": "NIT Trichy",
+    "skills": [
+      {
+        "name": "React",
+        "level": "Experienced"
+      },
+      {
+        "name": "Next.js",
+        "level": "Experienced"
+      },
+      {
+        "name": "UI/UX",
+        "level": "Beginner"
+      }
+    ],
+    "roles": [
+      "Frontend Developer"
+    ],
+    "interests": [
+      "web development",
+      "design systems"
+    ],
+    "buildGoal": "Shipping polished student products",
+    "hoursPerWeek": "7–10 hours",
+    "duration": "6 weeks",
+    "collaboration": [
+      "Scheduled meetings"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-003",
+    "fullName": "Rohan Mehta",
+    "headline": "Backend & DevOps",
+    "college": "VIT Vellore",
+    "skills": [
+      {
+        "name": "Python",
+        "level": "Experienced"
+      },
+      {
+        "name": "DevOps",
+        "level": "Comfortable"
+      },
+      {
+        "name": "Cloud",
+        "level": "Comfortable"
+      }
+    ],
+    "roles": [
+      "Backend Developer",
+      "DevOps Engineer"
+    ],
+    "interests": [
+      "open source",
+      "cloud native",
+      "developer tools"
+    ],
+    "buildGoal": "Open source cloud tooling",
+    "hoursPerWeek": "4–6 hours",
+    "duration": "Flexible",
+    "collaboration": [
+      "Async"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-004",
+    "fullName": "Meera Iyer",
+    "headline": "Product designer",
+    "college": "BITS Pilani",
+    "skills": [
+      {
+        "name": "UI/UX",
+        "level": "Experienced"
+      },
+      {
+        "name": "Figma",
+        "level": "Experienced"
+      }
+    ],
+    "roles": [
+      "UI / UX Designer"
+    ],
+    "interests": [
+      "social impact design",
+      "fintech"
+    ],
+    "buildGoal": "Designing accessible fintech for students",
+    "hoursPerWeek": "7–10 hours",
+    "duration": "10 weeks",
+    "collaboration": [
+      "Remote",
+      "Flexible"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-005",
+    "fullName": "Kabir Malhotra",
+    "headline": "First-time builder",
+    "college": "Delhi University",
+    "skills": [],
+    "roles": [],
+    "interests": [
+      "gaming"
+    ],
+    "buildGoal": "",
+    "hoursPerWeek": "1–3 hours",
+    "duration": "",
+    "collaboration": [],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-006",
+    "fullName": "Sana Kapoor",
+    "headline": "Java backend engineer",
+    "college": "NSUT Delhi",
+    "skills": [
+      {
+        "name": "Java",
+        "level": "Experienced"
+      },
+      {
+        "name": "MySQL",
+        "level": "Comfortable"
+      }
+    ],
+    "roles": [
+      "Backend Developer"
+    ],
+    "interests": [
+      "finance",
+      "banking systems"
+    ],
+    "buildGoal": "Rebuilding core banking workflows",
+    "hoursPerWeek": "10+ hours",
+    "duration": "12 weeks",
+    "collaboration": [
+      "Scheduled meetings"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-007",
+    "fullName": "Ishaan Gupta",
+    "headline": "ML for good",
+    "college": "IIT Bombay",
+    "skills": [
+      {
+        "name": "AI/ML",
+        "level": "Comfortable"
+      },
+      {
+        "name": "Python",
+        "level": "Comfortable"
+      }
+    ],
+    "roles": [
+      "AI / ML Engineer"
+    ],
+    "interests": [
+      "climate",
+      "sustainability",
+      "data science"
+    ],
+    "buildGoal": "Climate data storytelling",
+    "hoursPerWeek": "7–10 hours",
+    "duration": "8 weeks",
+    "collaboration": [
+      "Remote"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-008",
+    "fullName": "Priya Nair",
+    "headline": "Aspiring frontend dev",
+    "college": "Christ University",
+    "skills": [
+      {
+        "name": "React",
+        "level": "Beginner"
+      },
+      {
+        "name": "Figma",
+        "level": "Beginner"
+      }
+    ],
+    "roles": [
+      "Frontend Developer"
+    ],
+    "interests": [
+      "education technology"
+    ],
+    "buildGoal": "Learning in public",
+    "hoursPerWeek": "4–6 hours",
+    "duration": "Flexible",
+    "collaboration": [
+      "Remote"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-009",
+    "fullName": "Dev Anand",
+    "headline": "Full-stack hacker",
+    "college": "Manipal University",
+    "skills": [
+      {
+        "name": "React",
+        "level": "Experienced"
+      },
+      {
+        "name": "Node.js",
+        "level": "Experienced"
+      },
+      {
+        "name": "Cloud",
+        "level": "Comfortable"
+      },
+      {
+        "name": "Python",
+        "level": "Comfortable"
+      },
+      {
+        "name": "DevOps",
+        "level": "Beginner"
+      }
+    ],
+    "roles": [
+      "Full-stack Developer",
+      "Backend Developer"
+    ],
+    "interests": [
+      "saas",
+      "developer tools",
+      "web apps"
+    ],
+    "buildGoal": "A SaaS analytics starter",
+    "hoursPerWeek": "10+ hours",
+    "duration": "Flexible",
+    "collaboration": [
+      "Remote",
+      "Scheduled meetings"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-010",
+    "fullName": "Lakshmi Venkat",
+    "headline": "Hidden profile (perfect match, not visible)",
+    "college": "IIIT Hyderabad",
+    "skills": [
+      {
+        "name": "AI/ML",
+        "level": "Experienced"
+      },
+      {
+        "name": "React",
+        "level": "Experienced"
+      },
+      {
+        "name": "UI/UX",
+        "level": "Experienced"
+      }
+    ],
+    "roles": [
+      "AI / ML Engineer",
+      "UI / UX Designer"
+    ],
+    "interests": [
+      "climate ai"
+    ],
+    "buildGoal": "Climate ai",
+    "hoursPerWeek": "10+ hours",
+    "duration": "8 weeks",
+    "collaboration": [
+      "Remote",
+      "Async"
+    ],
+    "visibleToStudents": false,
+    "completed": true
+  },
+  {
+    "uid": "fixture-011",
+    "fullName": "Arjun Rao",
+    "headline": "React dev, availability unlisted",
+    "college": "SRM University",
+    "skills": [
+      {
+        "name": "React",
+        "level": "Experienced"
+      }
+    ],
+    "roles": [
+      "Frontend Developer"
+    ],
+    "interests": [
+      "developer tools"
+    ],
+    "buildGoal": "Better devtool docs",
+    "hoursPerWeek": "",
+    "duration": "",
+    "collaboration": [
+      "Async"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-012",
+    "fullName": "Nisha Reddy",
+    "headline": "Bioinformatics dev",
+    "college": "Anna University",
+    "skills": [
+      {
+        "name": "React",
+        "level": "Experienced"
+      },
+      {
+        "name": "Node.js",
+        "level": "Experienced"
+      }
+    ],
+    "roles": [
+      "Frontend Developer",
+      "Backend Developer"
+    ],
+    "interests": [
+      "bioinformatics",
+      "genomics"
+    ],
+    "buildGoal": "Genomics pipelines UI",
+    "hoursPerWeek": "7–10 hours",
+    "duration": "6 weeks",
+    "collaboration": [
+      "Remote"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-013",
+    "fullName": "Tom Dsouza",
+    "headline": "Climate volunteer designer",
+    "college": "St. Xavier's Mumbai",
+    "skills": [
+      {
+        "name": "Figma",
+        "level": "Comfortable"
+      }
+    ],
+    "roles": [
+      "UI / UX Designer"
+    ],
+    "interests": [
+      "climate volunteering",
+      "sustainability"
+    ],
+    "buildGoal": "Help NGOs design better",
+    "hoursPerWeek": "10+ hours",
+    "duration": "Flexible",
+    "collaboration": [
+      "Flexible"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-014",
+    "fullName": "Zara Khan",
+    "headline": "Fintech ML",
+    "college": "IIM Indore",
+    "skills": [
+      {
+        "name": "AI/ML",
+        "level": "Experienced"
+      }
+    ],
+    "roles": [
+      "AI / ML Engineer",
+      "Data Scientist"
+    ],
+    "interests": [
+      "machine learning",
+      "finance",
+      "fintech"
+    ],
+    "buildGoal": "ML risk scoring for campus lending",
+    "hoursPerWeek": "10+ hours",
+    "duration": "8 weeks",
+    "collaboration": [
+      "Remote"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-015",
+    "fullName": "Omar Faruk",
+    "headline": "WordPress builder",
+    "college": "Mumbai University",
+    "skills": [],
+    "roles": [],
+    "interests": [
+      "wordpress",
+      "blogging"
+    ],
+    "buildGoal": "Freelance websites",
+    "hoursPerWeek": "4–6 hours",
+    "duration": "",
+    "collaboration": [
+      "Remote"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-016",
+    "fullName": "Farah Shaikh",
+    "headline": "Full-stack product engineer",
+    "college": "PES University",
+    "skills": [
+      {
+        "name": "React",
+        "level": "Experienced"
+      },
+      {
+        "name": "Next.js",
+        "level": "Experienced"
+      },
+      {
+        "name": "Node.js",
+        "level": "Experienced"
+      }
+    ],
+    "roles": [
+      "Full-stack Developer",
+      "Frontend Developer"
+    ],
+    "interests": [
+      "fintech",
+      "saas",
+      "product engineering",
+      "mysql"
+    ],
+    "buildGoal": "Student credit cards done right",
+    "hoursPerWeek": "10+ hours",
+    "duration": "10 weeks",
+    "collaboration": [
+      "Scheduled meetings",
+      "Remote"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-017",
+    "fullName": "Devansh Verma",
+    "headline": "Backend + DevTools",
+    "college": "JIIT Noida",
+    "skills": [
+      {
+        "name": "Node.js",
+        "level": "Experienced"
+      },
+      {
+        "name": "Express",
+        "level": "Experienced"
+      },
+      {
+        "name": "MySQL",
+        "level": "Comfortable"
+      }
+    ],
+    "roles": [
+      "Backend Developer"
+    ],
+    "interests": [
+      "developer tools",
+      "apis",
+      "open source"
+    ],
+    "buildGoal": "API client generators",
+    "hoursPerWeek": "7–10 hours",
+    "duration": "8 weeks",
+    "collaboration": [
+      "Async"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-018",
+    "fullName": "Tanya Chopra",
+    "headline": "Climate product designer",
+    "college": "NID Ahmedabad",
+    "skills": [
+      {
+        "name": "UI/UX",
+        "level": "Experienced"
+      },
+      {
+        "name": "Figma",
+        "level": "Experienced"
+      }
+    ],
+    "roles": [
+      "UI / UX Designer",
+      "Product Manager"
+    ],
+    "interests": [
+      "climate",
+      "product design",
+      "sustainability"
+    ],
+    "buildGoal": "Designing decarbonization dashboards",
+    "hoursPerWeek": "7–10 hours",
+    "duration": "Flexible",
+    "collaboration": [
+      "Remote",
+      "Flexible"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-019",
+    "fullName": "Aariz Sheikh",
+    "headline": "Beginner AI + climate",
+    "college": "AMU Aligarh",
+    "skills": [
+      {
+        "name": "AI/ML",
+        "level": "Beginner"
+      },
+      {
+        "name": "Python",
+        "level": "Beginner"
+      }
+    ],
+    "roles": [
+      "AI / ML Engineer"
+    ],
+    "interests": [
+      "climate",
+      "machine learning"
+    ],
+    "buildGoal": "Small climate models",
+    "hoursPerWeek": "4–6 hours",
+    "duration": "Flexible",
+    "collaboration": [
+      "Async"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-020",
+    "fullName": "Vikram Menon",
+    "headline": "Hackathon regular",
+    "college": "LBS College Kottayam",
+    "skills": [
+      {
+        "name": "React",
+        "level": "Comfortable"
+      },
+      {
+        "name": "DevOps",
+        "level": "Beginner"
+      }
+    ],
+    "roles": [
+      "Frontend Developer"
+    ],
+    "interests": [
+      "hackathons",
+      "open innovation"
+    ],
+    "buildGoal": "48-hour builds",
+    "hoursPerWeek": "10+ hours",
+    "duration": "Flexible",
+    "collaboration": [
+      "In person"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-021",
+    "fullName": "Elena D'Souza",
+    "headline": "Cloud native engineer",
+    "college": "KLE Technological University",
+    "skills": [
+      {
+        "name": "Python",
+        "level": "Experienced"
+      },
+      {
+        "name": "DevOps",
+        "level": "Experienced"
+      },
+      {
+        "name": "Cloud",
+        "level": "Experienced"
+      }
+    ],
+    "roles": [
+      "DevOps Engineer",
+      "Backend Developer"
+    ],
+    "interests": [
+      "cloud native",
+      "open source tools",
+      "infrastructure"
+    ],
+    "buildGoal": "Zero-config deploys for students",
+    "hoursPerWeek": "10+ hours",
+    "duration": "Flexible",
+    "collaboration": [
+      "Async",
+      "Flexible"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-022",
+    "fullName": "Nandini Bhat",
+    "headline": "Mystery builder",
+    "college": "Manipal IT",
+    "skills": [
+      {
+        "name": "React",
+        "level": "Experienced"
+      },
+      {
+        "name": "AI/ML",
+        "level": "Experienced"
+      }
+    ],
+    "roles": [
+      "Full-stack Developer"
+    ],
+    "interests": [],
+    "buildGoal": "",
+    "hoursPerWeek": "",
+    "duration": "",
+    "collaboration": [],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-023",
+    "fullName": "Yusuf Ali",
+    "headline": "Finance systems dev",
+    "college": "SIMSREE Mumbai",
+    "skills": [
+      {
+        "name": "MySQL",
+        "level": "Experienced"
+      },
+      {
+        "name": "Java",
+        "level": "Experienced"
+      }
+    ],
+    "roles": [
+      "Backend Developer"
+    ],
+    "interests": [
+      "banking",
+      "finance",
+      "fintech"
+    ],
+    "buildGoal": "Banking dashboard for students",
+    "hoursPerWeek": "7–10 hours",
+    "duration": "12 weeks",
+    "collaboration": [
+      "Scheduled meetings"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  },
+  {
+    "uid": "fixture-024",
+    "fullName": "Chen Wei",
+    "headline": "Growth marketer",
+    "college": "University of Delhi",
+    "skills": [],
+    "roles": [],
+    "interests": [
+      "growth",
+      "seo",
+      "marketing"
+    ],
+    "buildGoal": "Content-led growth",
+    "hoursPerWeek": "4–6 hours",
+    "duration": "Flexible",
+    "collaboration": [
+      "Remote"
+    ],
+    "visibleToStudents": true,
+    "completed": true
+  }
+]

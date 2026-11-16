@@ -39,6 +39,21 @@ export const TEAM_COLLABORATION_OPTIONS = [
 
 export type TeamRecruitmentStatus = "open" | "closed";
 export type TeamRequestStatus = "pending" | "accepted" | "rejected" | "withdrawn";
+export type TeamTaskStatus = "todo" | "in_progress" | "done";
+
+export interface TeamTask {
+  id: string;
+  team_id: string;
+  title: string;
+  details: string;
+  assignee_uid: string | null;
+  assignee_name?: string | null;
+  status: TeamTaskStatus;
+  due_date: string | null;
+  created_by: string;
+  created_at: string;
+  updated_at: string;
+}
 
 export interface TeamProject {
   project_name: string;
@@ -69,6 +84,8 @@ export interface TeamMember {
   headline: string;
   college: string;
   skills: string[];
+  availability: string | null;
+  collaboration: string[];
 }
 
 export interface TeamSummary {

@@ -1,0 +1,141 @@
+[
+  {
+    "id": "brief-01-climate-ai",
+    "domain": "AI & Machine Learning",
+    "category": "AI / ML",
+    "technologies": [
+      "Python",
+      "React",
+      "Supabase"
+    ],
+    "requiredSkills": [
+      {
+        "skill_name": "AI/ML",
+        "preferred_role": "AI / ML Engineer"
+      },
+      {
+        "skill_name": "React",
+        "preferred_role": "Frontend Developer"
+      },
+      {
+        "skill_name": "UI/UX",
+        "preferred_role": "UI / UX Designer"
+      }
+    ],
+    "collaborationPreferences": [
+      "Remote",
+      "Async"
+    ],
+    "expectTop": "fixture-001"
+  },
+  {
+    "id": "brief-02-fintech-web",
+    "domain": "Finance & FinTech",
+    "category": "Web application",
+    "technologies": [
+      "Next.js",
+      "Node.js",
+      "MySQL"
+    ],
+    "requiredSkills": [
+      {
+        "skill_name": "React",
+        "preferred_role": "Frontend Developer"
+      },
+      {
+        "skill_name": "Node.js",
+        "preferred_role": "Backend Developer"
+      }
+    ],
+    "collaborationPreferences": [
+      "Scheduled meetings"
+    ],
+    "expectTop": "fixture-016"
+  },
+  {
+    "id": "brief-03-social-mobile",
+    "domain": "Social Impact",
+    "category": "Mobile application",
+    "technologies": [
+      "React",
+      "Figma"
+    ],
+    "requiredSkills": [
+      {
+        "skill_name": "Figma",
+        "preferred_role": "UI / UX Designer"
+      },
+      {
+        "skill_name": "React",
+        "preferred_role": "Frontend Developer"
+      }
+    ],
+    "collaborationPreferences": [
+      "Remote",
+      "Flexible"
+    ],
+    "expectTop": "fixture-004"
+  },
+  {
+    "id": "brief-04-oss-devtools",
+    "domain": "Developer Tools",
+    "category": "Open source",
+    "technologies": [
+      "Python",
+      "DevOps",
+      "Cloud"
+    ],
+    "requiredSkills": [
+      {
+        "skill_name": "Python",
+        "preferred_role": "Backend Developer"
+      },
+      {
+        "skill_name": "DevOps",
+        "preferred_role": "DevOps Engineer"
+      }
+    ],
+    "collaborationPreferences": [
+      "Async",
+      "Flexible"
+    ],
+    "expectTop": "fixture-021"
+  },
+  {
+    "id": "brief-05-sparse",
+    "domain": "Other",
+    "category": "Other",
+    "technologies": [],
+    "requiredSkills": [
+      {
+        "skill_name": "React",
+        "preferred_role": "Frontend Developer"
+      }
+    ],
+    "collaborationPreferences": [],
+    "expectTop": null
+  },
+  {
+    "id": "brief-06-climate-education",
+    "domain": "Climate & Sustainability",
+    "category": "Web application",
+    "technologies": [
+      "React",
+      "Figma"
+    ],
+    "requiredSkills": [
+      {
+        "skill_name": "React",
+        "preferred_role": "Frontend Developer"
+      },
+      {
+        "skill_name": "Figma",
+        "preferred_role": "UI / UX Designer"
+      }
+    ],
+    "collaborationPreferences": [
+      "Async"
+    ],
+    "expectTop": "fixture-001"
+  }
+]
