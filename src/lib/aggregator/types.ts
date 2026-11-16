@@ -10,7 +10,9 @@ export type SourcePlatform =
   | "Hack2skill"
   | "SIH"
   | "Devpost"
-  | "OrganizerFeed";
+  | "OrganizerFeed"
+  // Human-verified entries authored and published by PulsePoint curators.
+  | "Curated";
 
 export type HackathonMode = "Online" | "In Person" | "Hybrid";
 export type RegistrationStatus = "Open" | "Closing Soon" | "Closed" | "Unknown";
@@ -44,6 +46,7 @@ export interface NormalizedHackathon {
   verified_at?: string | null;
   discovered_at?: string;
   sync_hash: string;
+  archived_at?: string | null;
 }
 
 export interface AdapterResult {

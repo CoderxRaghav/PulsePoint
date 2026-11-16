@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { runHackathonAggregatorSync } from "@/lib/aggregator";
 import { getSupabaseAdminClient } from "@/lib/supabase-admin";
-import { verifyFirebaseIdToken } from "@/lib/firebase-admin";
+import { requireHackathonCurator, curatorErrorResponse } from "@/lib/hackathon-curators";
 
 /**
  * GET /api/hackathons/sync
@@ -47,51 +47,51 @@ export async function GET() {
 /**
  * POST /api/hackathons/sync
  * Triggers a global multi-source refresh with lock and cooldown guards.
+ * Curator-only — automated ingestion stays disabled until a source is
+ * authorized, and catalog maintenance is a curator responsibility.
  */
 export async function POST(req: NextRequest) {
-  const authorization = req.headers.get("authorization");
-  const token = authorization?.startsWith("Bearer ") ? authorization.slice(7).trim() : "";
-  if (!token) {
-    return NextResponse.json(
-      { success: false, status: "error", message: "Authentication is required to refresh listings." },
-      { status: 401 }
-    );
-  }
-
   try {
-    await verifyFirebaseIdToken(token);
+    await requireHackathonCurator(req);
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : String(err);
-    if (message.includes("not configured")) {
-      console.error("[API:Hackathons:sync] Firebase Admin configuration is missing.");
-      return NextResponse.json(
-        { success: false, status: "error", message: "Refresh authentication is unavailable." },
-        { status: 503 }
-      );
-    }
-    return NextResponse.json(
-      { success: false, status: "error", message: "The Firebase ID token is invalid or expired." },
-      { status: 401 }
-    );
+    return curatorErrorResponse(err);
   }
 
   try {
     const result = await runHackathonAggregatorSync();
 
+    // Soft-archive long-expired events after a refresh. Never deletes rows;
+    // bookmarks survive and archived events stay linkable with an "ended" banner.
+    let archivedExpired: number | null = null;
+    try {
+      const supabase = getSupabaseAdminClient();
+      const { data: archivedCount, error: archiveError } = await supabase.rpc("archive_expired_hackathons");
+      if (archiveError) {
+        console.error("[API:Hackathons:sync] Expiry archival failed:", archiveError.message);
+      } else {
+        archivedExpired = typeof archivedCount === "number" ? archivedCount : Number(archivedCount) || 0;
+      }
+    } catch (archiveError: unknown) {
+      console.error(
+        "[API:Hackathons:sync] Expiry archival failed:",
+        archiveError instanceof Error ? archiveError.message : String(archiveError)
+      );
+    }
+
     if (result.status === "locked") {
-      return NextResponse.json(result, { status: 409 });
+      return NextResponse.json({ ...result, archivedExpired }, { status: 409 });
     }
 
     if (result.status === "cooldown") {
-      return NextResponse.json(result, { status: 200 });
+      return NextResponse.json({ ...result, archivedExpired }, { status: 200 });
     }
 
     if (!result.success) {
       const status = result.status === "unavailable" ? 503 : result.status === "partial" ? 502 : 500;
-      return NextResponse.json(result, { status });
+      return NextResponse.json({ ...result, archivedExpired }, { status });
     }
 
-    return NextResponse.json(result, { status: 200 });
+    return NextResponse.json({ ...result, archivedExpired }, { status: 200 });
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
     return NextResponse.json(

@@ -43,6 +43,11 @@ export const SOURCE_ACCESS_POLICY: Record<SourcePlatform, SourceAccessPolicy> = 
     status: "permission_pending",
     reason: "Enable only for a documented feed/API with organizer authorization.",
   },
+  Curated: {
+    status: "authorized",
+    reason:
+      "In-house source: entries are authored and verified by PulsePoint curators and cite official URLs. No third-party feed permission is involved.",
+  },
 };
 
 export function isSourceAuthorized(source: SourcePlatform): boolean {

@@ -10,12 +10,21 @@ interface StudentProfileDoc {
   degree?: string;
   branch?: string;
   academicYear?: string;
-  avatarUrl?: string;
-  skills?: string[];
-  interests?: string[];
-  githubUrl?: string;
-  linkedinUrl?: string;
+  photoUrl?: string;
+  skills?: Array<string | { name?: unknown }>;
+  interests?: unknown;
+  github?: string;
+  linkedin?: string;
   visibleToStudents?: boolean;
+}
+
+/** The stored profile keeps skills as `{ name, category, level }` objects. */
+function skillName(skill: unknown): string | null {
+  if (typeof skill === "string") return skill;
+  if (skill && typeof skill === "object" && typeof (skill as { name?: unknown }).name === "string") {
+    return (skill as { name: string }).name;
+  }
+  return null;
 }
 
 export async function GET(
@@ -81,8 +90,15 @@ export async function GET(
       const p = row.profile as StudentProfileDoc;
       if (!p || p.visibleToStudents === false) continue;
 
-      const studentSkills = (p.skills || []).map((s) => s.toLowerCase().trim());
-      const studentInterests = (p.interests || []).map((s) => s.toLowerCase().trim());
+      const normalizedSkills = (Array.isArray(p.skills) ? p.skills : [])
+        .map(skillName)
+        .filter((name): name is string => Boolean(name && name.trim()))
+        .map((name) => name.trim());
+      const studentSkills = normalizedSkills.map((name) => name.toLowerCase());
+      const studentInterests = (Array.isArray(p.interests) ? p.interests : [])
+        .filter((interest): interest is string => typeof interest === "string")
+        .map((interest) => interest.toLowerCase().trim())
+        .filter(Boolean);
       const allStudentKeywords = [...studentSkills, ...studentInterests];
 
       // Calculate skill overlap
@@ -102,12 +118,12 @@ export async function GET(
         college: p.college || "University Student",
         branch: p.branch || "Computer Science",
         academicYear: p.academicYear || "Undergraduate",
-        avatarUrl: p.avatarUrl || null,
-        skills: p.skills || [],
+        avatarUrl: typeof p.photoUrl === "string" && p.photoUrl ? p.photoUrl : null,
+        skills: normalizedSkills,
         sharedSkills,
         matchScore,
-        githubUrl: p.githubUrl || null,
-        linkedinUrl: p.linkedinUrl || null,
+        githubUrl: typeof p.github === "string" && p.github ? p.github : null,
+        linkedinUrl: typeof p.linkedin === "string" && p.linkedin ? p.linkedin : null,
       });
     }
 

@@ -8,6 +8,7 @@ The global successful-sync cadence is 84 hours. Failed or partial attempts use a
 
 | Source | Access state | Evidence / next step |
 | --- | --- | --- |
+| PulsePoint Curation (`Curated`) | Authorized (in-house) | Human-verified listings authored/published by allowlisted curators via `/api/admin/hackathons*` or the seed flow. Entries cite the official listing + registration URLs; no third-party feed permission is involved. Approval scope recorded 2026-11-16. |
 | Unstop | Permission pending | A public listings endpoint responds, and `/api/public/*` is allowed in robots.txt; no public API license was verified. Confirm the endpoint's terms and permitted use with Unstop. |
 | HackerEarth | Permission pending | The prototype references an upcoming-events JSON endpoint. Confirm API documentation, terms, and permitted use with HackerEarth. |
 | Devfolio | Permission pending | The prototype references a JSON endpoint. Obtain official API/feed documentation or written authorization. |
@@ -18,6 +19,8 @@ The global successful-sync cadence is 84 hours. Failed or partial attempts use a
 | Universities, companies, and organizers | Permission pending per feed | Accept only documented, authorized RSS/ICS/JSON/API/partner feeds; retain attribution and official application links. |
 
 No third-party event API provider is approved. Review and obtain user approval for pricing and licensing before evaluating or integrating a paid provider.
+
+PulsePoint Curation (`Curated`, approved 2026-11-16, scope: catalog seeding and the student-suggestion publish flow) is authorized without third-party terms: every record is created or published by an allowlisted PulsePoint curator, cites the organizer's official listing and registration URLs, and is written to `hackathon_audit_log`. It is not an automated feed; enabling is handled by the curator workflow, not by connectors, and this approval does not authorize any scraping or third-party ingestion. Founder seeds verified events only.
 
 ## Approval requirements
 

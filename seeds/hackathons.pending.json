@@ -1,0 +1,133 @@
+{
+  "$schema": "https://pulsepoint.example/seed-schema.json",
+  "status": "pending_verification — DO NOT SEED. These entries were removed from seeds/hackathons.curated.json on 2026-11-16 during QC because they could not be independently re-verified against their official pages in this pass (JS-gated pages / unconfirmed fields). They are kept here, NOT discarded.",
+  "review_process": [
+    "1. Open the official source_url in a real browser (automated fetch returned empty/blocked on 2026-11-16).",
+    "2. Confirm: event name, organizer, registration deadline, start/end dates, prize pool, team size, eligibility, and that the apply link performs an actual registration.",
+    "3. Confirm registration is OPEN on the day of moving back to curated.json — never publish a closed event as open.",
+    "4. Move the verified entry into seeds/hackathons.curated.json with updated curation_notes (verification date + what was confirmed).",
+    "5. Re-run: npm run seed:hackathons -- --dry-run"
+  ],
+  "rejected_2026-11-16": [
+    {
+      "title": "HACK 6.0",
+      "reason": "Registration window live on Devfolio but dates/prizes/eligibility unpublished on official pages at capture time — insufficient to publish honestly.",
+      "source_url": "https://hack-1736.devfolio.co/"
+    },
+    {
+      "title": "Watch Face Design Challenge 2026",
+      "reason": "Design challenge, not a hackathon; excluded from the hackathon catalog.",
+      "source_url": "https://hack2skill.com/event/watchfacedesignchallenge2026/"
+    },
+    {
+      "title": "PromptWars Virtual (bi-weekly)",
+      "reason": "Recurring bi-weekly prompt challenge series, not a one-off hackathon; excluded from the catalog.",
+      "source_url": "https://hack2skill.com/event/pwvirtual1/"
+    },
+    {
+      "title": "ELUBuild",
+      "reason": "Solo SaaS build challenge (not a team hackathon; registration via the official EduLinkUp app only). Excluded.",
+      "source_url": "https://unstop.com/hackathons/elubuild-edulinkup-1811493"
+    },
+    {
+      "title": "SIH 2026 (Smart India Hackathon)",
+      "reason": "Registration closed (SPOC nomination/idea submission ended 15 Sep 2026). Grand finale Dec 2026 is invite-only via college internal hackathons.",
+      "source_url": "https://sih.gov.in/"
+    },
+    {
+      "title": "Housing Fintech Challenge (IIT Bombay × Hero Housing Finance)",
+      "reason": "Unstop lists the registration deadline as 12 Nov 2026 (past); third-party trackers marked it closed on 2026-11-16.",
+      "source_url": "https://unstop.com/hackathons/hero-housing-fintech-challenge-iit-bombay-1802169"
+    },
+    {
+      "title": "Dakar Bitcoin Hack (BTrust)",
+      "reason": "Official rules restrict participation to residents of Africa — unsuitable for the India-focused catalog.",
+      "source_url": "https://dakar-bitcoin-hack-2026.devpost.com/"
+    },
+    {
+      "title": "micro1 Eval Hackathon",
+      "reason": "Submissions closed 9 Nov 2026.",
+      "source_url": "https://www.hackerrank.com/event/micro1-eval-hackathon"
+    },
+    {
+      "title": "Hack Paradise (CSVTU Bhilai)",
+      "reason": "Registration closed/closing 17 Nov 2026 — too tight to publish honestly; re-check for next edition.",
+      "source_url": "https://unstop.com/hackathons/hack-paradise-kaushalya-20-chhattisgarh-swami-vivekanand-technical-university-csvtu-bhilai-chhattisgarh-1793030"
+    },
+    {
+      "title": "DSCI Hackathon 2026 (CTF, New Delhi)",
+      "reason": "Official page internally contradictory ('Registration closes 23rd November 2025' vs event date 9 Dec 2026 vs Internshala's '23 Nov 2026'). Unverifiable — excluded rather than published as open.",
+      "source_url": "https://www.dsci.in/content/hackathon-2026"
+    },
+    {
+      "title": "BeachHack Season 8 (MLH, Thrissur)",
+      "reason": "Official site shows 'Coming soon'; registration not open and no verifiable deadline — excluded.",
+      "source_url": "https://www.beachhack.in/"
+    }
+  ],
+  "events": [
+    {
+      "title": "Innodata AI Hackathon",
+      "organizer": "Innodata (powered by Hack2skill)",
+      "source_url": "https://hack2skill.com/event/innodata/",
+      "apply_url": "https://hack2skill.com/event/innodata/",
+      "mode": "Hybrid",
+      "location": "India — virtual build phase; Grand Finale in New Delhi on 20 Dec 2026",
+      "registration_deadline": "2026-12-06T23:59:59+05:30",
+      "start_date": "2026-11-10T00:00:00+05:30",
+      "end_date": "2026-12-06T23:59:59+05:30",
+      "prize_pool": "₹10,00,000 across 2 tracks (virtual build phase, Grand Finale in New Delhi)",
+      "prize_usd": null,
+      "description": "A nationwide AI engineering challenge hosted by Innodata and powered by Hack2skill: build, test and benchmark next-generation AI systems — from synthetic data generators to automated testing pipelines. Two tracks: Coding Task Factory and Visual Task Factory. Open to India's AI/ML talent, developers and campus innovators; teams of 3-4.",
+      "eligibility": "Developers, AI/ML engineers and students ('campus innovators') across India; teams of 3–4 members.",
+      "themes": ["AI/ML", "Data Engineering", "Software Engineering"],
+      "skills": ["Python", "Machine Learning", "Data Pipelines", "Testing"],
+      "team_size_min": 3,
+      "team_size_max": 4,
+      "featured": true,
+      "curation_notes": "Pending verification (carried over from the 2026-11-16 pre-existing draft). hack2skill.com returned empty content through automated fetch on 2026-11-16 (JS-gated) — event name, dates, prize, tracks and deadline ('Sun Dec 06, 2026 (IST)') were NOT independently confirmed in this pass. Founder must open the official page in a browser, confirm registration is OPEN, and re-check ALL fields before moving this entry back to seeds/hackathons.curated.json. Support: support+innodata@hack2skill.com. Original verification claim: 2026-11-16 (unconfirmed)."
+    },
+    {
+      "title": "The Algo Trading Innovation Challenge (IIT Bombay Techfest)",
+      "organizer": "Indian Institute of Technology (IIT) Bombay × Delta Exchange (Techfest 2026)",
+      "source_url": "https://unstop.com/hackathons/the-algo-trading-innovation-challenge-iit-bombay-1811240",
+      "apply_url": "https://unstop.com/hackathons/the-algo-trading-innovation-challenge-iit-bombay-1811240",
+      "mode": "Hybrid",
+      "location": "Online screening (Round 1); Round 2 on-campus at IIT Bombay, Powai, Mumbai, 15–18 Dec 2026",
+      "registration_deadline": "2026-11-30T00:00:00+05:30",
+      "start_date": "2026-12-15T00:00:00+05:30",
+      "end_date": "2026-12-18T23:59:59+05:30",
+      "prize_pool": "₹50,000 (top 3 winners)",
+      "prize_usd": null,
+      "description": "IIT Bombay Techfest × Delta Exchange national fintech competition: pick up to two of Delta Exchange's six AlgoHub features, identify a significant gap F&O traders face, and design an AI-assisted capability beyond what exists — without building around the platform's own announced roadmap items. Round 1 is an online slide submission with no working prototype required; the top 50 teams build prototypes at an on-campus hackathon at Techfest, IIT Bombay.",
+      "eligibility": "Engineering/UG/PG students with a valid college ID; teams of up to 4; cross-institution teams encouraged.",
+      "themes": ["Fintech", "AI/ML", "Trading Systems"],
+      "skills": ["AI/ML", "Financial Markets", "Problem Solving"],
+      "team_size_min": 1,
+      "team_size_max": 4,
+      "featured": true,
+      "curation_notes": "Pending verification (carried over from the 2026-11-16 pre-existing draft). Unstop page appeared in search results on 2026-11-16 ('Registration closes 30th November 2026') but the page could not be machine-checked; the prior draft noted the API payload showed end_regn_dt 2026-11-29T00:00 IST — a ~1 day discrepancy. Founder must open the Unstop link in a browser, confirm registration is OPEN, and reconcile the deadline and the Dec 15–18 on-campus Round 2 dates before moving this entry back to seeds/hackathons.curated.json. Original verification claim: 2026-11-16 (unconfirmed)."
+    },
+    {
+      "title": "Mantrastra — TechSrijan '27 AI Engineering Challenge",
+      "organizer": "Madan Mohan Malaviya University of Technology (MMMUT), RESO, under TechSrijan '27",
+      "source_url": "https://unstop.com/hackathons/mantrastra-techsrijan-27-madan-mohan-malaviya-university-of-technology-1810554",
+      "apply_url": "https://unstop.com/hackathons/mantrastra-techsrijan-27-madan-mohan-malaviya-university-of-technology-1810554",
+      "mode": "In Person",
+      "location": "MMMUT Campus, Gorakhpur, Uttar Pradesh",
+      "registration_deadline": "2026-12-20T23:59:59+05:30",
+      "start_date": "2026-12-22T00:00:00+05:30",
+      "end_date": "2026-12-27T23:59:59+05:30",
+      "prize_pool": "₹12,000+ (with certificates)",
+      "prize_usd": null,
+      "description": "Three-round AI engineering competition by MMMUT RESO under TechSrijan '27: an online quiz (Round 1, 22 Dec 2026, followed for opt-in students by an AI workshop), an in-person AI code comprehension round (Round 2), and an agentic engineering final (Round 3, 25–27 Dec 2026). Tests AI-assisted software engineering: prompting, Git/GitHub, code comprehension, agentic tool use — AI prohibited in the Round 1 quiz, encouraged afterwards.",
+      "eligibility": "Open to students of all academic years from all colleges and universities in India; teams of 2–4 (inter-college teams allowed).",
+      "themes": ["AI/ML", "Developer Tools", "Software Engineering"],
+      "skills": ["Artificial Intelligence", "Debugging", "Critical Thinking"],
+      "team_size_min": 2,
+      "team_size_max": 4,
+      "featured": false,
+      "curation_notes": "Pending verification (carried over from the 2026-11-16 pre-existing draft). Unstop listing appeared in search results on 2026-11-16 (LIVE since 2026-11-14) but the page could not be machine-checked. Founder must open the Unstop link in a browser, confirm registration is OPEN, and re-confirm the registration deadline and the three round dates (22/25–27 Dec 2026) plus prize details before moving this entry back to seeds/hackathons.curated.json. Original verification claim: 2026-11-16 (unconfirmed)."
+    }
+  ]
+}

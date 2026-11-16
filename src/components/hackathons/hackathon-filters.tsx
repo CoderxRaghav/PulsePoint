@@ -3,6 +3,8 @@
 import React from "react";
 import { BookmarkIcon, SparklesIcon, FilterIcon } from "@/components/ui/icons";
 
+export type DeadlineFilter = "live" | "7d" | "30d" | "all";
+
 interface HackathonFiltersProps {
   activeTab: "all" | "featured" | "saved";
   onTabChange: (tab: "all" | "featured" | "saved") => void;
@@ -14,36 +16,48 @@ interface HackathonFiltersProps {
   onModeChange: (mode: string) => void;
   selectedStatus: string;
   onStatusChange: (status: string) => void;
+  deadlineFilter: DeadlineFilter;
+  onDeadlineFilterChange: (value: DeadlineFilter) => void;
   sortBy: string;
   onSortChange: (sort: string) => void;
 }
 
 const SOURCES = [
-  { id: "all", label: "All Platforms" },
+  { id: "all", label: "All sources" },
+  { id: "Curated", label: "PulsePoint Curation" },
+  { id: "OrganizerFeed", label: "Organizer feeds" },
+  { id: "SIH", label: "Smart India Hackathon" },
+  { id: "MLH", label: "MLH" },
   { id: "Devfolio", label: "Devfolio" },
   { id: "HackerEarth", label: "HackerEarth" },
   { id: "Unstop", label: "Unstop" },
-  { id: "MLH", label: "MLH" },
   { id: "Hack2skill", label: "Hack2skill" },
-  { id: "SIH", label: "SIH" },
-  { id: "Devpost", label: "Devpost" },
-  { id: "OrganizerFeed", label: "Organizer feeds" },
 ];
 
 const MODES = [
-  { id: "all", label: "All Formats" },
+  { id: "all", label: "All formats" },
   { id: "Online", label: "Online" },
   { id: "In Person", label: "In Person" },
   { id: "Hybrid", label: "Hybrid" },
 ];
 
 const STATUSES = [
-  { id: "all", label: "All Statuses" },
-  { id: "Open", label: "Open" },
-  { id: "Closing Soon", label: "Closing Soon" },
-  { id: "Closed", label: "Closed" },
-  { id: "Unknown", label: "Unverified status" },
+  { id: "all", label: "All statuses" },
+  { id: "Open", label: "Registration open" },
+  { id: "Closing Soon", label: "Closing soon (≤ 72h)" },
+  { id: "Closed", label: "Registration closed" },
+  { id: "Unknown", label: "No deadline listed" },
 ];
+
+const DEADLINES: Array<{ id: DeadlineFilter; label: string }> = [
+  { id: "live", label: "Open for registration" },
+  { id: "7d", label: "Closing within 7 days" },
+  { id: "30d", label: "Closing within 30 days" },
+  { id: "all", label: "Include closed & completed" },
+];
+
+const selectClass =
+  "px-3 py-1.5 rounded-xl bg-charcoal-900 border border-charcoal-700 text-warm-white text-xs focus:outline-none focus:border-crimson";
 
 export function HackathonFilters({
   activeTab,
@@ -56,123 +70,139 @@ export function HackathonFilters({
   onModeChange,
   selectedStatus,
   onStatusChange,
+  deadlineFilter,
+  onDeadlineFilterChange,
   sortBy,
   onSortChange,
 }: HackathonFiltersProps) {
+  const filtersActive =
+    selectedSource !== "all" ||
+    selectedMode !== "all" ||
+    selectedStatus !== "all" ||
+    deadlineFilter !== "live";
+
   return (
-    <div className="py-6 border-b border-white/10 bg-[#070709]/80 backdrop-blur-md sticky top-0 z-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-        {/* Top Bar: Navigation Tabs (All, Featured, Saved) */}
+    <div className="py-5 border-b border-charcoal-700 bg-space-black/95 backdrop-blur-md sticky top-0 z-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
+        {/* Tabs + sort */}
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2 p-1 rounded-2xl bg-[#12131b] border border-white/10">
+          <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-charcoal-900 border border-charcoal-700">
             <button
               onClick={() => onTabChange("all")}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+              aria-pressed={activeTab === "all"}
+              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-colors ${
                 activeTab === "all"
-                  ? "bg-rose-600 text-white shadow-md shadow-rose-950/40"
-                  : "text-neutral-400 hover:text-white"
+                  ? "bg-crimson text-white"
+                  : "text-warm-white-muted hover:text-warm-white"
               }`}
             >
-              All Hackathons ({totalCount ?? "—"})
+              All ({totalCount ?? "—"})
             </button>
 
             <button
               onClick={() => onTabChange("featured")}
-              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+              aria-pressed={activeTab === "featured"}
+              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition-colors ${
                 activeTab === "featured"
-                  ? "bg-rose-600 text-white shadow-md shadow-rose-950/40"
-                  : "text-neutral-400 hover:text-white"
+                  ? "bg-crimson text-white"
+                  : "text-warm-white-muted hover:text-warm-white"
               }`}
             >
-              <SparklesIcon className="w-3.5 h-3.5 text-amber-400" />
+              <SparklesIcon className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
               <span>Featured</span>
             </button>
 
             <button
               onClick={() => onTabChange("saved")}
-              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+              aria-pressed={activeTab === "saved"}
+              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition-colors ${
                 activeTab === "saved"
-                  ? "bg-rose-600 text-white shadow-md shadow-rose-950/40"
-                  : "text-neutral-400 hover:text-white"
+                  ? "bg-crimson text-white"
+                  : "text-warm-white-muted hover:text-warm-white"
               }`}
             >
               <BookmarkIcon className="w-3.5 h-3.5" />
-              <span>Saved Events ({savedCount})</span>
+              <span>Saved ({savedCount})</span>
             </button>
           </div>
 
-          {/* Sort By Select */}
           <div className="flex items-center gap-2">
-            <span className="text-xs text-neutral-400">Sort by:</span>
+            <label htmlFor="hackathon-sort" className="text-xs text-warm-white-muted">Sort by:</label>
             <select
+              id="hackathon-sort"
               value={sortBy}
               onChange={(e) => onSortChange(e.target.value)}
-              className="px-3 py-1.5 rounded-xl bg-[#12131b] border border-white/10 text-white text-xs focus:outline-none focus:border-rose-500"
+              className={selectClass}
             >
-              <option value="deadline">Registration Deadline (Soonest)</option>
-              <option value="prize">Prize Pool (Highest)</option>
-              <option value="latest">Recently Added</option>
+              <option value="deadline">Deadline (soonest first)</option>
+              <option value="prize">Prize pool (highest)</option>
+              <option value="latest">Recently added</option>
             </select>
           </div>
         </div>
 
-        {/* Filters Row */}
-        <div className="flex flex-wrap items-center gap-3 pt-2 text-xs">
-          <div className="flex items-center gap-1.5 text-neutral-400 mr-2 font-medium">
-            <FilterIcon className="w-3.5 h-3.5 text-rose-400" />
-            <span>Filters:</span>
+        {/* Filter row */}
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
+          <div className="flex items-center gap-1.5 text-warm-white-muted mr-1 font-medium">
+            <FilterIcon className="w-3.5 h-3.5 text-crimson" />
+            <span>Filters</span>
           </div>
 
-          {/* Source Dropdown / Pills */}
           <select
+            aria-label="Filter by registration window"
+            value={deadlineFilter}
+            onChange={(e) => onDeadlineFilterChange(e.target.value as DeadlineFilter)}
+            className={selectClass}
+          >
+            {DEADLINES.map((d) => (
+              <option key={d.id} value={d.id}>{d.label}</option>
+            ))}
+          </select>
+
+          <select
+            aria-label="Filter by source"
             value={selectedSource}
             onChange={(e) => onSourceChange(e.target.value)}
-            className="px-3 py-1.5 rounded-xl bg-[#12131b] border border-white/10 text-neutral-200 text-xs focus:outline-none focus:border-rose-500"
+            className={selectClass}
           >
             {SOURCES.map((s) => (
-              <option key={s.id} value={s.id}>
-                {s.label}
-              </option>
+              <option key={s.id} value={s.id}>{s.label}</option>
             ))}
           </select>
 
-          {/* Mode Dropdown */}
           <select
+            aria-label="Filter by format"
             value={selectedMode}
             onChange={(e) => onModeChange(e.target.value)}
-            className="px-3 py-1.5 rounded-xl bg-[#12131b] border border-white/10 text-neutral-200 text-xs focus:outline-none focus:border-rose-500"
+            className={selectClass}
           >
             {MODES.map((m) => (
-              <option key={m.id} value={m.id}>
-                {m.label}
-              </option>
+              <option key={m.id} value={m.id}>{m.label}</option>
             ))}
           </select>
 
-          {/* Status Dropdown */}
           <select
+            aria-label="Filter by registration status"
             value={selectedStatus}
             onChange={(e) => onStatusChange(e.target.value)}
-            className="px-3 py-1.5 rounded-xl bg-[#12131b] border border-white/10 text-neutral-200 text-xs focus:outline-none focus:border-rose-500"
+            className={selectClass}
           >
             {STATUSES.map((st) => (
-              <option key={st.id} value={st.id}>
-                {st.label}
-              </option>
+              <option key={st.id} value={st.id}>{st.label}</option>
             ))}
           </select>
 
-          {/* Reset Filters button if active */}
-          {(selectedSource !== "all" || selectedMode !== "all" || selectedStatus !== "all") && (
+          {filtersActive && (
             <button
               onClick={() => {
                 onSourceChange("all");
                 onModeChange("all");
                 onStatusChange("all");
+                onDeadlineFilterChange("live");
               }}
-              className="text-xs text-rose-400 hover:text-rose-300 underline ml-2"
+              className="text-xs text-crimson hover:underline ml-1"
             >
-              Reset Filters
+              Reset filters
             </button>
           )}
         </div>

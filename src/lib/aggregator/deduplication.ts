@@ -19,10 +19,10 @@ export function calculateRegistrationStatus(
   deadlineIso?: string,
   declaredStatus?: RegistrationStatus
 ): RegistrationStatus {
-  if (!deadlineIso) return declaredStatus || "Open";
+  if (!deadlineIso) return declaredStatus || "Unknown";
 
   const deadline = new Date(deadlineIso).getTime();
-  if (isNaN(deadline)) return declaredStatus || "Open";
+  if (isNaN(deadline)) return declaredStatus || "Unknown";
 
   const now = Date.now();
   const diffHours = (deadline - now) / (1000 * 60 * 60);

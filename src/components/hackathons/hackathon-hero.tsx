@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   SearchIcon,
   SparklesIcon,
@@ -27,7 +28,7 @@ interface HackathonHeroProps {
     sources?: string[];
   };
   statsAvailable: boolean;
-  aggregatorActive: boolean;
+  isCurator: boolean;
   lastSyncTime?: string | null;
   onRefresh: () => Promise<void>;
   isRefreshing: boolean;
@@ -51,7 +52,7 @@ export function HackathonHero({
   onThemeSelect,
   stats,
   statsAvailable,
-  aggregatorActive,
+  isCurator,
   lastSyncTime,
   onRefresh,
   isRefreshing,
@@ -64,145 +65,139 @@ export function HackathonHero({
     onSearchChange(localInput);
   };
 
-  // Format last sync time nicely
+  // External feed syncs are a curator operation; automated ingestion stays
+  // disabled until a source is explicitly authorized in the ledger.
   const formattedSyncTime = lastSyncTime
-    ? new Date(lastSyncTime).toLocaleTimeString(undefined, {
-        hour: "2-digit",
-        minute: "2-digit",
-      }) + " today"
-    : "Not synced yet";
+    ? new Date(lastSyncTime).toLocaleDateString(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
+    : "never";
 
   return (
-    <div className="relative pt-12 pb-10 border-b border-white/10 overflow-hidden bg-gradient-to-b from-[#0e0f17] via-[#070709] to-[#070709]">
-      {/* Decorative Glow Elements */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-gradient-to-r from-rose-600/15 via-purple-600/10 to-transparent blur-[120px] pointer-events-none rounded-full" />
-      <div className="absolute -top-24 right-10 w-96 h-96 bg-rose-500/10 blur-[140px] pointer-events-none rounded-full" />
+    <div className="relative overflow-hidden border-b border-charcoal-700 bg-space-black">
+      {/* Decorative banner glow — from the theme banner tokens */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[var(--banner-start)]/10 via-transparent to-[var(--banner-end)]/10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Top Sync & Refresh Banner Bar */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-10">
+        {/* Curation status bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-neutral-300">
-            <span
-              className={`w-2 h-2 rounded-full ${
-                aggregatorActive ? "bg-emerald-400 animate-pulse" : "bg-amber-400"
-              }`}
-            />
-            <span>
-              {aggregatorActive
-                ? "Multi-Source Aggregator Active"
-                : "Aggregator Awaiting Authorized Sources"}
-            </span>
-            <span className="text-neutral-500">•</span>
-            <span className="text-neutral-400">
-              Aggregating Devfolio, HackerEarth, Unstop, MLH & SIH
-            </span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-charcoal-900/70 border border-charcoal-700 text-xs text-warm-white-muted">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+            <span className="font-medium text-warm-white">Human-verified catalog</span>
+            <span className="hidden sm:inline">· every listing cites its official source</span>
           </div>
 
-          {/* Prominent Global Refresh Button */}
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] text-neutral-400 hidden sm:inline">
-              Last synced: <span className="text-neutral-300 font-medium">{formattedSyncTime}</span>
-            </span>
-            <button
-              onClick={onRefresh}
-              disabled={isRefreshing}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-rose-500/15 text-neutral-200 hover:text-rose-300 border border-white/10 hover:border-rose-500/30 text-xs font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 disabled:opacity-60"
-              title="Trigger global synchronization across all external platforms"
+          <div className="flex items-center gap-3">
+            {isCurator && (
+              <button
+                onClick={onRefresh}
+                disabled={isRefreshing}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-charcoal-700 bg-charcoal-900 text-warm-white-muted hover:text-warm-white hover:border-crimson/40 text-xs font-semibold transition-colors disabled:opacity-60"
+                title="Curator-only: re-checks authorized external sources (none are authorized yet)"
+              >
+                <RefreshCwIcon className={`w-3.5 h-3.5 text-crimson ${isRefreshing ? "animate-spin" : ""}`} />
+                <span>{isRefreshing ? "Checking…" : "Refresh catalog"}</span>
+              </button>
+            )}
+            <Link
+              href="/hackathons/suggest"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-crimson hover:bg-crimson-hover text-white text-xs font-semibold transition-colors shadow-sm"
             >
-              <RefreshCwIcon className={`w-3.5 h-3.5 text-rose-400 ${isRefreshing ? "animate-spin" : ""}`} />
-              <span>{isRefreshing ? "Synchronizing Platforms..." : "Refresh Hackathons"}</span>
-            </button>
+              Suggest an event
+            </Link>
           </div>
         </div>
 
-        {/* Refresh Notification Toast if returned */}
         {refreshMessage && (
           <div
-            className={`mb-6 p-3.5 rounded-xl border text-xs flex items-center gap-2.5 transition-all ${
+            role={refreshMessage.type === "error" ? "alert" : "status"}
+            className={`mb-6 p-3.5 rounded-xl border text-xs flex items-center gap-2.5 ${
               refreshMessage.type === "success"
-                ? "bg-emerald-950/40 border-emerald-500/30 text-emerald-300"
+                ? "border-emerald-600/30 bg-emerald-600/10 text-emerald-800 dark:text-emerald-300"
                 : refreshMessage.type === "error"
-                ? "bg-rose-950/40 border-rose-500/30 text-rose-300"
-                : "bg-blue-950/40 border-blue-500/30 text-blue-300"
+                  ? "border-rose-600/30 bg-rose-600/10 text-rose-800 dark:text-rose-300"
+                  : "border-blue-600/30 bg-blue-600/10 text-blue-800 dark:text-blue-300"
             }`}
           >
             {refreshMessage.type === "success" ? (
-              <CheckCircleIcon className="w-4 h-4 shrink-0 text-emerald-400" />
+              <CheckCircleIcon className="w-4 h-4 shrink-0" />
             ) : (
-              <AlertCircleIcon className="w-4 h-4 shrink-0 text-amber-400" />
+              <AlertCircleIcon className="w-4 h-4 shrink-0" />
             )}
             <span>{refreshMessage.text}</span>
           </div>
         )}
 
-        {/* Hero Title & Subheading */}
+        {/* Title & subheading */}
         <div className="max-w-3xl mb-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-rose-500 mb-2 block">
-            Collegiate Hackathon Radar
-          </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-serif text-white tracking-tight leading-[1.1] mb-4">
-            Discover Hackathons.
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-warm-white tracking-tight leading-[1.08] mb-4 font-serif">
+            Hackathons worth your weekend.
           </h1>
-          <p className="text-xl sm:text-2xl text-neutral-300 font-light leading-relaxed">
-            Build Something Extraordinary.
+          <p className="text-base sm:text-lg text-warm-white-muted leading-relaxed max-w-2xl">
+            A small catalog, checked by hand — every listing links to the organizer&apos;s official
+            registration page. PulsePoint never registers you on a host&apos;s behalf.
           </p>
-          <p className="text-sm text-neutral-400 mt-2">
-            Aggregated in real time from premier platforms, universities, and open hackathon leagues worldwide. Apply directly on official host portals.
-          </p>
+          {isCurator && (
+            <p className="text-xs text-warm-white-muted mt-3">
+              Last external sync: {formattedSyncTime}. Automated sources activate only after written permission is recorded in the sources ledger.
+            </p>
+          )}
         </div>
 
-        {/* Dynamic Real Statistics Cards (Never fake hardcoded counts) */}
+        {/* Live catalog statistics (computed from the catalog — never fabricated) */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-8">
-          <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-rose-400 text-xs mb-1">
+          <div className="p-4 rounded-2xl border border-charcoal-700 bg-charcoal-900/70">
+            <div className="flex items-center gap-2 text-crimson text-xs mb-1.5">
               <SparklesIcon className="w-4 h-4" />
-              <span className="font-semibold uppercase tracking-wider text-[10px]">Active Events</span>
+              <span className="font-semibold uppercase tracking-wider text-[10px] text-warm-white-muted">Live events</span>
             </div>
-            <p className="text-2xl sm:text-3xl font-bold font-serif text-white">
+            <p className="text-2xl sm:text-3xl font-bold font-serif text-warm-white">
               {statsAvailable ? stats.totalActive : "—"}
             </p>
-            <span className="text-[11px] text-neutral-400">Open for registrations</span>
+            <span className="text-[11px] text-warm-white-muted">Still open for registration</span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-amber-400 text-xs mb-1">
+          <div className="p-4 rounded-2xl border border-charcoal-700 bg-charcoal-900/70">
+            <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 text-xs mb-1.5">
               <AwardIcon className="w-4 h-4" />
-              <span className="font-semibold uppercase tracking-wider text-[10px]">Total Prizes</span>
+              <span className="font-semibold uppercase tracking-wider text-[10px] text-warm-white-muted">Listed prizes</span>
             </div>
-            <p className="text-2xl sm:text-3xl font-bold font-serif text-amber-300">
+            <p className="text-2xl sm:text-3xl font-bold font-serif text-amber-600 dark:text-amber-300">
               {statsAvailable ? stats.formattedPrizeSum : "—"}
             </p>
-            <span className="text-[11px] text-neutral-400">Calculated value</span>
+            <span className="text-[11px] text-warm-white-muted">Sum across live listings</span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-cyan-400 text-xs mb-1">
+          <div className="p-4 rounded-2xl border border-charcoal-700 bg-charcoal-900/70">
+            <div className="flex items-center gap-2 text-sky-600 dark:text-cyan-400 text-xs mb-1.5">
               <GlobeIcon className="w-4 h-4" />
-              <span className="font-semibold uppercase tracking-wider text-[10px]">Virtual / Online</span>
+              <span className="font-semibold uppercase tracking-wider text-[10px] text-warm-white-muted">Online</span>
             </div>
-            <p className="text-2xl sm:text-3xl font-bold font-serif text-white">
+            <p className="text-2xl sm:text-3xl font-bold font-serif text-warm-white">
               {statsAvailable ? stats.onlineCount : "—"}
             </p>
-            <span className="text-[11px] text-neutral-400">Join from anywhere</span>
+            <span className="text-[11px] text-warm-white-muted">Join from anywhere</span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-purple-400 text-xs mb-1">
+          <div className="p-4 rounded-2xl border border-charcoal-700 bg-charcoal-900/70">
+            <div className="flex items-center gap-2 text-violet-600 dark:text-violet-400 text-xs mb-1.5">
               <CalendarIcon className="w-4 h-4" />
-              <span className="font-semibold uppercase tracking-wider text-[10px]">In-Person & Hybrid</span>
+              <span className="font-semibold uppercase tracking-wider text-[10px] text-warm-white-muted">In person</span>
             </div>
-            <p className="text-2xl sm:text-3xl font-bold font-serif text-white">
+            <p className="text-2xl sm:text-3xl font-bold font-serif text-warm-white">
               {statsAvailable ? stats.inPersonCount : "—"}
             </p>
-            <span className="text-[11px] text-neutral-400">Onsite collegiate demos</span>
+            <span className="text-[11px] text-warm-white-muted">On-campus and in-person</span>
           </div>
         </div>
 
-        {/* Integrated Search Bar & Quick Theme Pills */}
+        {/* Search */}
         <div className="space-y-4">
           <form onSubmit={handleFormSubmit} className="relative max-w-2xl">
             <div className="relative flex items-center">
-              <SearchIcon className="absolute left-4 w-5 h-5 text-neutral-400 pointer-events-none" />
+              <SearchIcon className="absolute left-4 w-5 h-5 text-warm-white-muted pointer-events-none" />
               <input
                 type="text"
                 value={localInput}
@@ -210,8 +205,9 @@ export function HackathonHero({
                   setLocalInput(e.target.value);
                   onSearchChange(e.target.value);
                 }}
-                placeholder="Search by event title, organizer, skills (e.g. PyTorch, React, Solidity)..."
-                className="w-full pl-12 pr-28 py-3.5 rounded-2xl bg-[#12131b] border border-white/15 text-white placeholder-neutral-500 text-sm focus:outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 shadow-inner"
+                aria-label="Search hackathons"
+                placeholder="Search by title, organizer or keywords…"
+                className="w-full pl-12 pr-24 py-3.5 rounded-2xl bg-charcoal-900 border border-charcoal-700 text-warm-white placeholder:text-warm-white-muted text-sm focus:outline-none focus:border-crimson focus:ring-2 focus:ring-crimson/20"
               />
               {localInput && (
                 <button
@@ -220,23 +216,23 @@ export function HackathonHero({
                     setLocalInput("");
                     onSearchChange("");
                   }}
-                  className="absolute right-20 text-xs text-neutral-400 hover:text-white px-2 py-1"
+                  className="absolute right-[4.5rem] text-xs text-warm-white-muted hover:text-warm-white px-2 py-1"
                 >
                   Clear
                 </button>
               )}
               <button
                 type="submit"
-                className="absolute right-2 px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold transition-all shadow-md"
+                className="absolute right-2 px-4 py-2 rounded-xl bg-crimson hover:bg-crimson-hover text-white text-xs font-semibold transition-colors"
               >
                 Search
               </button>
             </div>
           </form>
 
-          {/* Theme Quick Pills */}
+          {/* Theme quick pills */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-neutral-400 font-medium mr-1">Trending Themes:</span>
+            <span className="text-xs text-warm-white-muted font-medium mr-1">Themes:</span>
             {POPULAR_THEMES.map((theme) => {
               const isActive =
                 (theme === "All" && selectedTheme === "all") ||
@@ -246,10 +242,11 @@ export function HackathonHero({
                 <button
                   key={theme}
                   onClick={() => onThemeSelect(theme === "All" ? "all" : theme)}
-                  className={`px-3 py-1 rounded-xl text-xs font-medium transition-all border ${
+                  aria-pressed={isActive}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-colors border ${
                     isActive
-                      ? "bg-rose-500/20 text-rose-300 border-rose-500/40 shadow-sm"
-                      : "bg-white/5 text-neutral-300 border-white/10 hover:bg-white/10 hover:text-white"
+                      ? "bg-crimson text-white border-crimson"
+                      : "bg-charcoal-900 border-charcoal-700 text-warm-white-muted hover:text-warm-white hover:border-[var(--border-strong)]"
                   }`}
                 >
                   {theme}
