@@ -8,6 +8,7 @@ export function ProductPreview() {
 
   return (
     <section className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 -mt-8 sm:-mt-12 mb-24 sm:mb-32">
+      <h2 className="sr-only">Product preview</h2>
       {/* Decorative ambient underglow */}
       <div className="absolute inset-x-12 -top-10 h-32 bg-radial from-rose-500/15 via-violet-600/10 to-transparent blur-3xl pointer-events-none" />
 
@@ -110,7 +111,7 @@ export function ProductPreview() {
                     <UsersIcon className="w-4 h-4 text-neutral-400" />
                     <span>Lead: Sarah M. (Design), David K. (Frontend)</span>
                   </div>
-                  <span className="text-neutral-500">HackMIT 2026 Candidate</span>
+                  <span className="text-neutral-400">HackMIT 2026 Candidate</span>
                 </div>
               </div>
 

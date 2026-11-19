@@ -32,7 +32,7 @@ export function SiteFooter() {
             <p className="text-neutral-400 max-w-md text-sm leading-relaxed mb-4">
               PulsePoint is a student teammate discovery and project collaboration platform designed to help builders find complementary collaborators and ship meaningful projects.
             </p>
-            <p className="text-xs text-neutral-500">
+            <p className="text-xs text-neutral-400">
               Student teammate discovery &amp; project collaboration — built in the open.{" "}
               <Link href="/legal" className="underline underline-offset-2 hover:text-white transition-colors">Privacy &amp; Guidelines</Link>
             </p>
@@ -128,7 +128,7 @@ export function SiteFooter() {
         </div>
 
         {/* Bottom copyright and disclaimer */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
           <p>© 2026 PulsePoint. Open student collaboration platform.</p>
           <p>Built with Next.js, TypeScript & Tailwind CSS.</p>
         </div>

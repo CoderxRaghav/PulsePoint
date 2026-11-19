@@ -784,3 +784,42 @@ html[data-theme="dark"] .auth-brand-panel > div:first-child > svg {
   filter: grayscale(1) sepia(1) saturate(5) hue-rotate(300deg);
   opacity: 0.62;
 }
+
+/* Floating AI assistant widget (homepage) */
+@keyframes assistant-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+.assistant-float {
+  animation: assistant-float 3.8s ease-in-out infinite;
+}
+
+@keyframes assistant-panel-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.assistant-panel-in {
+  animation: assistant-panel-in 0.26s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes assistant-dot-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.45; }
+  40% { transform: translateY(-4px); opacity: 1; }
+}
+
+.assistant-typing-dot {
+  animation: assistant-dot-bounce 1.15s ease-in-out infinite;
+}
+
+.assistant-typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.assistant-typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .assistant-float,
+  .assistant-panel-in,
+  .assistant-typing-dot {
+    animation: none !important;
+  }
+}

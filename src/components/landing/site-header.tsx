@@ -40,7 +40,6 @@ export function SiteHeader() {
     { label: "Hackathons", href: "/hackathons" },
     { label: "How It Works", href: "#how-it-works" },
     { label: "Features", href: "#features" },
-    { label: "AI Assistance", href: "#ai-assistance" },
   ];
 
   const handleLinkClick = () => {

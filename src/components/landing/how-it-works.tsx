@@ -56,7 +56,7 @@ export function HowItWorks() {
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-xs font-bold tracking-widest text-neutral-500 font-mono">
+                    <span className="text-xs font-bold tracking-widest text-neutral-400 font-mono">
                       STEP {item.step}
                     </span>
                     <span className={`p-2.5 rounded-xl border ${item.badgeColor}`}>

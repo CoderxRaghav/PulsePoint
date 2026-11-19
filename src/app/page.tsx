@@ -8,6 +8,7 @@ import { Features } from "@/components/landing/features";
 import { AiPreview } from "@/components/landing/ai-preview";
 import { FinalCta } from "@/components/landing/final-cta";
 import { SiteFooter } from "@/components/landing/site-footer";
+import { AssistantWidget } from "@/components/assistant/assistant-widget";
 import { ProfileCreatedToast } from "@/components/profile/profile-created-toast";
 
 export default function LandingPage() {
@@ -41,6 +42,9 @@ export default function LandingPage() {
 
       {/* Comprehensive Site Footer */}
       <SiteFooter />
+
+      {/* Floating AI Assistant (reuses the Phase 7A assistant; disabled-by-default) */}
+      <AssistantWidget />
     </div>
   );
 }
